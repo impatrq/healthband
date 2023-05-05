@@ -15,4 +15,4 @@
 
 Buscamos diseñar un sistema capaz de monitorear los signos vitales de una persona,  siendo capaz de activar un protocolo de emergencias cuando se presente una complicacion de salud. 
 
-El instagram de Healthband es este: [@HealthBand.Aid](https://www.instagram.com/healthband.aid/){target="_blank"}
+El instagram de Healthband es este: [@HealthBand.Aid](https://www.instagram.com/healthband.aid/)

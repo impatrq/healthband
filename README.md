@@ -19,5 +19,32 @@ Buscamos diseñar un sistema capaz de monitorear los signos vitales de una perso
 
 
 (foto grupal)
+Pagano, Tobias: 
+Instagram: @tobiass.p
+Mail: paganotobias05@gmail.com
+
+
+
+Gomez, Gonzalo:
+Instagram: @gomez.gonza01
+Mail: gonzalogomez9673@gmail.com
+
+
+
+Giulianetti Bruno
+Instagram: @br1egm
+Mail: zazitag@gmail.com
+
+
+
+Acuña, Alvaro:
+Mail: alvarodaniel977@gmail.com
+
+
+
+Perlo, Mateo:
+@mateo.perlo32
+mateoperlo22@gmail.com
+
 
 Seguinos en nuestro perfil oficial de Instagram : [@healthBand.aid](https://www.instagram.com/healthband.aid/)

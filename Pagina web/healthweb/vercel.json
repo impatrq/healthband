@@ -10,8 +10,5 @@
             "src": "/(.*)",
             "dest": "healthweb/wsgi.py"
         }
-    ],
-    "rewrites": [
-        { "source": "/(.*)", "destination": "/" }
-      ]
+    ]
 }

@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app', 'healthband.vercel.app']
 
-
+##
 # Application definition
 
 INSTALLED_APPS = [

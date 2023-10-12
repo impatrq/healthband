@@ -118,9 +118,9 @@ USE_TZ = True
 
 STATIC_ROOT = "static/"
 STATIC_URL = "static/"
-#STATICFILES_DIRS = [
-#    BASE_DIR / "static/"
-#]
+STATICFILES_DIRS = [
+    BASE_DIR / "static/"
+]
 #STATIC_ROOT = 'static/'  #esto arruina todo, cuidado.
 
 STATICFILES_FINDERS = [

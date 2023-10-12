@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'healthweb.urls'
@@ -117,12 +118,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 #STATIC_ROOT = "static/"
-STATIC_URL = "static/"
-STATICFILES_DIRS = [
-    BASE_DIR / "static/"
-]
+#STATIC_URL = "static/"
+#STATICFILES_DIRS = [
+#    BASE_DIR / "static/"
+#]
 #STATIC_ROOT = 'static/'  #esto arruina todo, cuidado.
 
+STATIC_ROOT = "static/"
+STATIC_URL = "static/"
+#STATICFILES_DIRS = [
+#    BASE_DIR / "static/"
+#]
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder'

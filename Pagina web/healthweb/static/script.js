@@ -2982,7 +2982,6 @@
       }
     });
   
-    // <stdin>
     require_webflow_brand();
     require_webflow_edit();
     require_webflow_focus_visible();
@@ -2993,31 +2992,3 @@
     require_webflow_forms();
     require_webflow_navbar();
   })();
-  /*!
-   * tram.js v0.8.2-global
-   * Cross-browser CSS3 transitions in JavaScript
-   * https://github.com/bkwld/tram
-   * MIT License
-   */
-  /*!
-   * Webflow._ (aka) Underscore.js 1.6.0 (custom build)
-   * _.each
-   * _.map
-   * _.find
-   * _.filter
-   * _.any
-   * _.contains
-   * _.delay
-   * _.defer
-   * _.throttle (webflow)
-   * _.debounce
-   * _.keys
-   * _.has
-   * _.now
-   * _.template (webflow: upgraded to 1.13.6)
-   *
-   * http://underscorejs.org
-   * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-   * Underscore may be freely distributed under the MIT license.
-   * @license MIT
-   */

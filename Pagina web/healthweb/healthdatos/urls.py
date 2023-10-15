@@ -6,6 +6,7 @@ path("nosotros/", views.about, name="nosotros"),
 path("team/", views.team, name="team"),
 path("contact/", views.contact, name="contact"),
 path("projects/", views.projects, name="projects"),
-path("blog/", views.blog, name="blog")
+path("blog/", views.blog, name="blog"),
+path("datos/", views.mediciones, name="mediciones"),
 ]
 

@@ -25,7 +25,7 @@ def projects(request):
 def blog(request):
     return render(request, "blog.html")
 
-def recibir_datos_json(request):
+def mediciones(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)  # Analiza el JSON recibido

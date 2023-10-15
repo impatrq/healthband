@@ -25,6 +25,7 @@ def projects(request):
 def blog(request):
     return render(request, "blog.html")
 
+@csrf_exempt
 def mediciones(request):
     if request.method == 'POST': #le pide que reciba metodos POST nomas 
         try: #Bucle que intenta infinitamente

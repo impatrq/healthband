@@ -26,13 +26,13 @@ def blog(request):
     return render(request, "blog.html")
 
 def mediciones(request):
-    if request.method == 'POST':
-        try:
+    if request.method == 'POST': #le pide que reciba metodos POST nomas 
+        try: #Bucle que intenta infinitamente
             data = json.loads(request.body)  # Analiza el JSON recibido
-            pulsaciones = data.get("pulsaciones")
-            Spo2 = data.get("Spo2")
-            datos.objects.create(pulsaciones=pulsaciones, oxigeno=Spo2)
-            return JsonResponse({'message': 'Datos recibidos y almacenados exitosamente'})
+            pulsaciones = data.get("pulsaciones") #Agarra del JSON la data que tenga de nombre pulsaciones
+            Spo2 = data.get("Spo2") #Agarra del JSON la data que tenga de nombre Spo2
+            datos.objects.create(pulsaciones=pulsaciones, oxigeno=Spo2) #Crea automaticamente valores en la tabla de la base de datos 
+            return JsonResponse({'message': 'Datos recibidos y almacenados exitosamente'}) 
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Error al analizar JSON'}, status=400)
     return JsonResponse({'error': 'Método no permitido'}, status=405)

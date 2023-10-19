@@ -29,7 +29,7 @@ def blog(request):
 def mediciones(request):
     if request.method == 'POST': #le pide que reciba metodos POST nomas 
         try: #Bucle que intenta infinitamente
-            data = json.loads(request.body)  # Analiza el JSON recibido
+            data = request.POST.dict()  # Analiza el JSON recibido
             pulsaciones = data.get("PULSOS") #Agarra del JSON la data que tenga de nombre pulsaciones
             oxigeno = data.get("OXIGENO") #Agarra del JSON la data que tenga de nombre Spo2
             datos.objects.create(pulsaciones=pulsaciones, oxigeno=oxigeno) #Crea automaticamente valores en la tabla de la base de datos 

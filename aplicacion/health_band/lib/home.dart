@@ -19,8 +19,8 @@ class HomeView extends StatelessWidget {
         ),
       ),
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
+        width: 393.0,
+        height: 852.0,
         padding: const EdgeInsets.fromLTRB(70.0, 25.0, 70.0, 25.0),
         child: Column(
           children: [
@@ -29,22 +29,60 @@ class HomeView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                constraints: const BoxConstraints(maxHeight: double.infinity, maxWidth: double.infinity ),
-                decoration: BoxDecoration(color: Color.fromARGB(255, 137, 137, 137), borderRadius: BorderRadius.circular(3.0)),
-                //decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(2.0)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(3.0), color: Colors.grey),
+                child: Column(
                   children: [
-                    Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/pulse-bg.png', width: 5.0, height: 5.0,),
-                    Text('holamundo', style: TextStyle(color: Colors.lightBlue, fontSize: 10)),
-                    IconButton(onPressed: (){}, icon: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/chevron-Agw.png', width: 3.0, height: 3.0,))
+                    Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/pulse-bg.png', width: 5.0, height: 5.0,),
+                      Text('holamundo', style: TextStyle(color: Colors.lightBlue, fontSize: 10)),
+                      IconButton(onPressed: (){}, icon: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/chevron-Agw.png', width: 3.0, height: 3.0,))
+                    ]
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text('X', style: TextStyle(color: Colors.amber, fontSize: 25.0),),
+                    ],
+                  ),
                   ],
+                  //decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(2.0)),
+                  
+                  
                 ),
-                
-              )
+              ),
+              SizedBox(
+              width: 25.0,
+              ),
+              Container(
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(3.0), color: Colors.grey),
+                child: Column(
+                 children: [
+                    Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/pulse-bg.png', width: 5.0, height: 5.0,),
+                      Text('holamundo', style: TextStyle(color: Colors.lightBlue, fontSize: 10)),
+                      IconButton(onPressed: (){}, icon: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/chevron-Agw.png', width: 3.0, height: 3.0,))
+                    ]
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text('X', style: TextStyle(color: Colors.amber, fontSize: 25.0),),
+                    ],
+                  ),
+                  ], 
+                ),
+              ),
             ],
-          )
+          ),
+          Row(
+
+          ),
           
         ],)
       ),

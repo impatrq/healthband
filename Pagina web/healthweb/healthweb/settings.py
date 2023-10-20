@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-nhu$1)&ic7)gokzji@%zg08&1lody)iy-8#y9qu^x+mj-^+9tm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app', 'healthband.vercel.app', '127.0.0.1','192.168.111.4','192.168.0.51','www.healthband.com.ar', '192.168.125.218','192.168.111.120']
+ALLOWED_HOSTS = ['.vercel.app', 'healthband.vercel.app', '127.0.0.1','192.168.111.4','192.168.126.50','www.healthband.com.ar', '192.168.125.218','192.168.111.120']
 
 ##
 # Application definition
@@ -119,11 +119,11 @@ USE_TZ = True
 
 #STATIC_ROOT = 'static/'  #esto arruina todo, cuidado.
 
-STATIC_ROOT = "./Pagina web/healthweb/static/"
+#STATIC_ROOT = "./Pagina web/healthweb/static/"
 STATIC_URL = "static/"
-STATICFILES_DIRS = [
-    BASE_DIR / "static/"
-]
+#STATICFILES_DIRS = [
+#    BASE_DIR / "static/"
+#]
 #STATICFILES_FINDERS = [
 #    'django.contrib.staticfiles.finders.FileSystemFinder',
 #    'django.contrib.staticfiles.finders.AppDirectoriesFinder'

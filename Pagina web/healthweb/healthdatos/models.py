@@ -1,5 +1,5 @@
 from django.db import models
 
 class datos(models.Model):
-    pulsos = models.IntegerField(default=None)
-    oxigenacion = models.IntegerField(default=None)
+    pulsos = models.FloatField(default=None)
+    oxigenacion = models.FloatField(default=None)

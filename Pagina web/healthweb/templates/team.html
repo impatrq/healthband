@@ -66,7 +66,11 @@
                     <div class="intro-content asd quienessomos-copy"><img
                             src="https://uploads-ssl.webflow.com/64aaf98a88164330c4490176/651c5e77aa55668b308077d2_pulse-jHq.png"
                             loading="lazy" height="100" alt="" class="image-3 bpm" />
-                        <div class="text-block-4">aca irian los datos medidos. </div>
+                        <div class="text-block-4"><u1>
+                            {%for datos in valorpulso%}
+                            <li>{{datos.pulsos}} </li> 
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
                 <div id="w-node-c28cc763-f708-1e61-f196-6bd9fce98043-d2f423e9">

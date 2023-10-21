@@ -1,5 +1,7 @@
 from django.db import models
+import datetime 
 
-class datos(models.Model):
-    pulsos = models.FloatField(default=None)
-    oxigenacion = models.FloatField(default=None)
+class Datos(models.Model):
+    pulsos = models.FloatField(default=None, null= True)
+    oxigenacion = models.FloatField(default=None, null= True)
+    time = models.DateTimeField(default=datetime.datetime.now, null=True)

@@ -3,7 +3,7 @@ from . import models
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-
+from .models import Datos
 
 # Create your views here.
 
@@ -14,7 +14,11 @@ def about(request):
     return render(request, "about.html")
 
 def team(request):
-    return render(request, "team.html")
+    valorpulso = Datos.objects.all().order_by('-fecha_registro')[:1]
+    data = []
+    for valor in valorpulso.iterator():
+        data.append(valor)
+    return render(request, "team.html", {'valorpulso':data})
 
 def contact(request):
     return render(request, "contact.html")

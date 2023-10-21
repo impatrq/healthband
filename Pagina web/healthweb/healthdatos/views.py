@@ -14,7 +14,7 @@ def about(request):
     return render(request, "about.html")
 
 def team(request):
-    valorpulso = Datos.objects.all().order_by('-fecha_registro')[:1]
+    valorpulso = Datos.objects.all().order_by('time')[:1]
     data = []
     for valor in valorpulso.iterator():
         data.append(valor)

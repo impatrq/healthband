@@ -14,7 +14,7 @@ def about(request):
     return render(request, "about.html")
 
 def team(request):
-    valorpulso = Datos.objects.all().order_by('time')[-1]
+    valorpulso = Datos.objects.all().order_by('-time')[:1]
     return render(request, "team.html", {'valorpulso':valorpulso})
 
 def contact(request):

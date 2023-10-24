@@ -81,7 +81,9 @@
                     <div class="intro-content asd quienessomos-copy"><img
                             src="https://uploads-ssl.webflow.com/64aaf98a88164330c4490176/651c60188386d472cd1ccdf4_wind-sign-z2j.png"
                             loading="lazy" width="100" height="100" alt="" class="image-3 o2" />
-                        <div class="text-block-4">aca irian los datos medidos. </div>
+                        <div class="text-block-4">{%for datos in valorpulso%}
+                            <li>{{datos.oxigenacion}}</li> 
+                            {% endfor %}</u1></div>
                     </div>
                 </div>
                 <div id="w-node-c28cc763-f708-1e61-f196-6bd9fce9804a-d2f423e9">
@@ -92,7 +94,7 @@
                     <div class="intro-content asd quienessomos-copy"><img
                             src="https://uploads-ssl.webflow.com/64aaf98a88164330c4490176/651c6018ceefcb4c3f002997_red-blood-cells-5E7.png"
                             loading="lazy" height="512" alt="" width="64" class="image-3 mgdl" />
-                        <div class="text-block-4">aca irian los datos medidos. </div>
+                        <div class="text-block-4"> Esta funcion se aplicara en un futuro! </div>
                     </div>
                 </div>
                 <div id="w-node-c28cc763-f708-1e61-f196-6bd9fce98051-d2f423e9">
@@ -105,7 +107,9 @@
                             loading="lazy" width="100" height="100" alt=""
                             srcset="https://uploads-ssl.webflow.com/64aaf98a88164330c4490176/651c601829522ca4b3b2528e_sugar-cube-p-500.png 500w, https://uploads-ssl.webflow.com/64aaf98a88164330c4490176/651c601829522ca4b3b2528e_sugar-cube.png 512w"
                             sizes="(max-width: 479px) 70vw, 100px" class="image-3 act" />
-                        <div class="text-block-4">aca irian los datos medidos. </div>
+                        <div class="text-block-4">{%for datos in valorpulso%}
+                            <li>{{datos.movimiento}}</li> 
+                            {% endfor %}</u1> </div>
                     </div>
                 </div>
                 <div id="w-node-c28cc763-f708-1e61-f196-6bd9fce98058-d2f423e9">
@@ -116,7 +120,9 @@
                     <div class="intro-content asd quienessomos-copy"><img
                             src="https://uploads-ssl.webflow.com/64aaf98a88164330c4490176/651c60187116e43800837ea3_temperature-4Fh.png"
                             loading="lazy" width="100" height="100" alt="" class="image-3 c" />
-                        <div class="text-block-4">aca irian los datos medidos. </div>
+                        <div class="text-block-4">{%for datos in valorpulso%}
+                            <li>{{datos.temperatura}}</li> 
+                            {% endfor %}</u1></div>
                     </div>
                 </div>
                 <div id="w-node-c28cc763-f708-1e61-f196-6bd9fce9805f-d2f423e9">

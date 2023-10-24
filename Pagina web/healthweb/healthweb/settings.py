@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-nhu$1)&ic7)gokzji@%zg08&1lody)iy-8#y9qu^x+mj-^+9tm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', 'healthband.vercel.app', '127.0.0.1','192.168.111.4','192.168.126.50','www.healthband.com.ar', '192.168.125.218','192.168.111.120']
+ALLOWED_HOSTS = ['.vercel.app', 'healthband.vercel.app', '127.0.0.1','192.168.111.4','192.168.126.50','www.healthband.com.ar', '192.168.125.218','192.168.111.120', '192.168.0.186']
 
 ##
 # Application definition
@@ -81,11 +81,11 @@ load_dotenv()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get("DB_NAME"),
-        'USER': os.environ.get("DB_USER"),
-        'PASSWORD': os.environ.get("DB_PASSWORD"),
-        'HOST': os.environ.get("DB_HOST"),
-        'PORT': os.environ.get("DB_PORT"),
+        'NAME': os.environ.get("postgres"),
+        'USER': os.environ.get("postgres"),
+        'PASSWORD': os.environ.get("healthband_2023"),
+        'HOST': os.environ.get("db.bhqahbhnapapcazmqnkg.supabase.co"),
+        'PORT': os.environ.get("5432"),
     }
 }
 

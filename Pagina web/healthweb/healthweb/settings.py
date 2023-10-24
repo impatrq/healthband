@@ -81,11 +81,11 @@ load_dotenv()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get("postgres"),
-        'USER': os.environ.get("postgres"),
-        'PASSWORD': os.environ.get("healthband_2023"),
-        'HOST': os.environ.get("db.bhqahbhnapapcazmqnkg.supabase.co"),
-        'PORT': os.environ.get("5432"),
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'healthband_2023',
+        'HOST': 'db.bhqahbhnapapcazmqnkg.supabase.co',
+        'PORT': '5432',
     }
 }
 

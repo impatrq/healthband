@@ -5,26 +5,24 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import Datos
 
-# Create your views here.
-
 def home(request):
     return render(request, "home.html")
 
-def about(request):
-    return render(request, "about.html")
+def nosotros(request):
+    return render(request, "quienessomos.html")
 
-def team(request):
+def tusalud(request):
     valorpulso = Datos.objects.all().order_by('-time')[:1]
-    return render(request, "team.html", {'valorpulso':valorpulso})
+    return render(request, "tusalud.html", {'valorpulso':valorpulso})
 
-def contact(request):
-    return render(request, "contact.html")
+def tuexperiencia(request):
+    return render(request, "tuexperiencia.html")
 
-def projects(request):
-    return render(request, "projects.html")
+def masinfo(request):
+    return render(request, "masinfo.html")
 
-def blog(request):
-    return render(request, "blog.html")
+def app(request):
+    return render(request, "app.html")
 
 @csrf_exempt
 def mediciones(request):

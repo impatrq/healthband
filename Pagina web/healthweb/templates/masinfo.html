@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 {% load static %}
-<html data-wf-domain="healthband-aids-website.webflow.io" data-wf-page="651c5161c70a6abcd2f423dd"
+<html data-wf-domain="healthband-aids-website.webflow.io" data-wf-page="651c5162c70a6abcd2f423e1"
     data-wf-site="64aaf98a88164330c4490176">
 
 <head>
     <meta charset="utf-8" />
-    <title>Healthband aid</title>
-    <meta content="Business - Webflow HTML website template" property="og:title" />
-    <meta
-        content="https://assets-global.website-files.com/5c6eb5400253230156de2bd6/5cdc268dd7274d5c05c6009a_Business%20SEO.jpg"
-        property="og:image" />
-    <meta content="Business - Webflow HTML website template" property="twitter:title" />
-    <meta
-        content="https://assets-global.website-files.com/5c6eb5400253230156de2bd6/5cdc268dd7274d5c05c6009a_Business%20SEO.jpg"
-        property="twitter:image" />
+    <title>Blog</title>
+    <meta content="Blog" property="og:title" />
+    <meta content="Blog" property="twitter:title" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="Webflow" name="generator" />
     <link
@@ -30,10 +24,10 @@
     <link href="https://assets-global.website-files.com/img/webclip.png" rel="apple-touch-icon" />
 </head>
 
-<body class="body">
+<body class="body-6">
     <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease"
         role="banner" class="navigation w-nav">
-        <div class="navigation-wrap"><a href="{% url "home" %}" aria-current="page" class="logo-link w-nav-brand w--current"><img
+        <div class="navigation-wrap"><a href="{% url "home" %}" class="logo-link w-nav-brand"><img
                     src="https://assets-global.website-files.com/64aaf98a88164330c4490176/6531c7334d0afe70af15ada2_logo%20hb%20webapp.png"
                     width="108" sizes="(max-width: 479px) 16vw, (max-width: 991px) 12vw, 8vw"
                     srcset="https://assets-global.website-files.com/64aaf98a88164330c4490176/6531c7334d0afe70af15ada2_logo%20hb%20webapp-p-500.png 500w, https://assets-global.website-files.com/64aaf98a88164330c4490176/6531c7334d0afe70af15ada2_logo%20hb%20webapp-p-800.png 800w, https://assets-global.website-files.com/64aaf98a88164330c4490176/6531c7334d0afe70af15ada2_logo%20hb%20webapp-p-1080.png 1080w, https://assets-global.website-files.com/64aaf98a88164330c4490176/6531c7334d0afe70af15ada2_logo%20hb%20webapp.png 1396w"
@@ -43,11 +37,11 @@
                         class="navigation-item nosotros w-nav-link">NOSOTROS</a><a href="{% url "tusalud" %}"
                         class="navigation-item tu-salud w-nav-link">TU SALUD</a><a href="{% url "tuexperiencia" %}"
                         class="navigation-item experiencia w-nav-link">TU EXPERIENCIA</a><a href="{% url "masinfo" %}"
-                        class="navigation-item mas-info w-nav-link">Más Info</a><a href="{% url "app" %}"
-                        class="navigation-item app w-nav-link">APP</a><a href="mailto:healthband.aid@gmail.com"
-                        class="navigation-item mail w-nav-link">CONTACTANOS AL MAIL</a><a
-                        href="mailto:healthband.aid@gmail.com" class="button cc-contact-us w-inline-block">
-                        <div class="text-block-3">CONTACTANOS AL MAIL</div>
+                        aria-current="page" class="navigation-item mas-info w-nav-link w--current">Más Info</a><a
+                        href="{% url "app" %}" class="navigation-item app w-nav-link">APP</a><a
+                        href="mailto:healthband.aid@gmail.com" class="navigation-item mail w-nav-link">CONTACTANOS AL
+                        MAIL</a><a href="mailto:healthband.aid@gmail.com" class="button cc-contact-us w-inline-block">
+                        <div class="text-block-3">ContactANOS AL MAIL</div>
                     </a></nav>
                 <div class="menu-button w-nav-button"><img
                         src="https://assets-global.website-files.com/64aaf98a88164330c4490176/6516de1b361dbac9f196f15e_boton%20desplegable.PNG"
@@ -57,18 +51,38 @@
             </div>
         </div>
     </div>
-    <div class="section cc-store-home-wrap">
-        <div class="intro-content asd">
-            <div class="intro-text">
-                <div class="heading-jumbo-copy">Seamos Conscientes, Salvemos Vidas.</div>
-                <div class="paragraph-bigger cc-bigger-white-light">La salud es un aspecto fundamental en nuestras
-                    vidas. Para muchas personas, es una cuestión del día a día. HealthBand propone una manera cómoda e
-                    integral de conocer en todo momento nuestro estado de salud, siendo preparado para interpretar este
-                    mismo de forma inteligente e incorporando un protocolo para emergencias, evitando tragedias y
-                    salvando vidas.<br /></div>
-            </div><a href="/about" class="button cc-jumbo-button cc-jumbo-white w-inline-block">
-                <div>REGISTRATE</div>
-            </a>
+    <div class="section cc-home-wrap">
+        <div class="intro-header-copy cc-subpage-copy">
+            <div class="intro-content">
+                <div class="heading-jumbo">Nuestro proyecto<br /></div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="section-heading-wrap">
+                <div class="label cc-light">Como usar</div>
+                <h2>HealthBand</h2>
+            </div>
+            <div class="w-dyn-list">
+                <div role="list" class="blog-list-wrap w-dyn-items">
+                    <div role="listitem" class="blog-item w-dyn-item">
+                        <div class="blog-summary-wrap"></div>
+                    </div>
+                    <div role="listitem" class="blog-item w-dyn-item">
+                        <div class="blog-summary-wrap"></div>
+                    </div>
+                    <div role="listitem" class="blog-item w-dyn-item">
+                        <div class="blog-summary-wrap"></div>
+                    </div>
+                    <div role="listitem" class="blog-item w-dyn-item">
+                        <div class="blog-summary-wrap"></div>
+                    </div>
+                    <div role="listitem" class="blog-item w-dyn-item">
+                        <div class="blog-summary-wrap"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <footer class="section">

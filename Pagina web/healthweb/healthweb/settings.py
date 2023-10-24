@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-nhu$1)&ic7)gokzji@%zg08&1lody)iy-8#y9qu^x+mj-^+9tm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', 'healthband.vercel.app', '192.168.111.83', 'healthband.com.ar', 'www.healthband.com.ar' ]
+ALLOWED_HOSTS = ['.vercel.app', 'healthband.vercel.app', '192.168.111.83', 'healthband.com.ar' ]
 
 ##
 # Application definition

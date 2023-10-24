@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  int myIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -185,11 +193,170 @@ class HomeView extends StatelessWidget {
                   ),
                 ],
               ),
-              
+             
+              SizedBox(height: 30,),
+              Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                        borderRadius : BorderRadius.circular(16),
+                        color : Color.fromRGBO(218, 3, 3, 1),
+                        ),
+                  child: MaterialButton(
+                        onPressed: () {
+                          FlutterPhoneDirectCaller.callNumber('+5491126913745');
+                        },
+                        padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius : BorderRadius.only(
+                                  topLeft: Radius.circular(8),
+                                  topRight: Radius.circular(8),
+                                  bottomLeft: Radius.circular(8),
+                                  bottomRight: Radius.circular(8),),
+                                ),
+                              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                      image : DecorationImage(
+                                      image: AssetImage('assets/images/Info.png'),
+                                      fit: BoxFit.fitWidth
+                                      ),
+                                    )
+                                  ),
+                                  SizedBox(width : 8),
+                                  Center(
+                                    child: Text('Emergencias', textAlign: TextAlign.center, style: TextStyle(
+                                    color: Color.fromRGBO(186, 186, 186, 1),
+                                    fontFamily: 'Commissioner',
+                                    fontSize: 11,
+                                    letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                    fontWeight: FontWeight.normal,
+                                    height: 1
+                                    ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                  
+                                ],
+                              ),
+                            ),
+                ),
+              ),
+
+              //BotondeemergenciasWidget()
             ],)
           ),
+          
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(onTap:(index) {
+        setState((){
+          myIndex = index;
+        });
+      } ,
+      currentIndex: myIndex,  
+      items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+        BottomNavigationBarItem(icon: Icon(Icons.alarm), label: "Alarm")
+      ],),
     );
   }
 }
+
+
+        
+        
+/*class BotondeemergenciasWidget extends StatefulWidget {
+  @override
+  _BotondeemergenciasWidgetState createState() => _BotondeemergenciasWidgetState();}
+        
+   class _BotondeemergenciasWidgetState extends State<BotondeemergenciasWidget> {
+   @override
+   Widget build(BuildContext context) {
+        // Figma Flutter Generator BotondeemergenciasWidget - FRAME - VERTICAL
+        
+      return Container(
+        padding: EdgeInsets.symmetric(horizontal: 127, vertical: 58),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+        
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(color : Color.fromRGBO(255, 255, 255, 1),),
+            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+        
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                  borderRadius : BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16), bottomLeft: Radius.circular(16),bottomRight: Radius.circular(16),),
+                  color : Color.fromRGBO(218, 3, 3, 1),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+              
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius : BorderRadius.only(
+                            topLeft: Radius.circular(8),
+                            topRight: Radius.circular(8),
+                            bottomLeft: Radius.circular(8),
+                            bottomRight: Radius.circular(8),),
+                          color : Color.fromRGBO(255, 255, 255, 1),
+                          ),
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          
+                          children: <Widget>[
+                            Container(
+                              width: 20,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                image : DecorationImage(
+                                image: AssetImage('assets/images/Info.png'),
+                                fit: BoxFit.fitWidth
+                                ),
+                              )
+                            ),
+                            SizedBox(width : 8),
+                            Text('Emergencias', textAlign: TextAlign.center, style: TextStyle(
+                            color: Color.fromRGBO(186, 186, 186, 1),
+                            fontFamily: 'Commissioner',
+                            fontSize: 11,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1
+                            ),
+                            ),
+
+                          ],
+                        ),
+                      ),
+
+                          ],
+                        ),
+                      ),
+
+                          ],
+                        ),
+                      ),
+                  ],
+                        ),
+                      );
+                          }
+                          }*/
+                          

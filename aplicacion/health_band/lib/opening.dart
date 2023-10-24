@@ -4,6 +4,7 @@ import 'dart:async';
 
 
 class OpeningWidget extends StatefulWidget {
+  static String id = 'opening';
   @override 
   _OpeningWidgetState createState() => _OpeningWidgetState();
 }

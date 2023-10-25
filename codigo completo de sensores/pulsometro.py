@@ -72,7 +72,7 @@ class Pulso():
                 valueir = ir_reading
                 valuered = red_reading
                 
-                Spo2 = valueir * 0.007632 # factor de conversion aproximado calculado para el Spo2
+                Spo2 = valueir * 0.009 # factor de conversion aproximado calculado para el Spo2
                 self.datos2 = Spo2
                 
                 history.append(valuered)

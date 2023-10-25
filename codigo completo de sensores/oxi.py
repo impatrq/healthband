@@ -15,7 +15,13 @@ import network
 import ujson as json
 #se importa la funcion ujson y se le pide que se llame "json"
 import lm335
+
 from lm335 import grados
+
+import mpu_imu
+
+from mpu_imu import actividad
+
 
 def conexion():
     #se crea la funcion conexion
@@ -26,7 +32,7 @@ def conexion():
         #se muestra en la pantalla un mensaje el cual dice "Estableciendo conexion con la red"
         sta_if.active(True)
         #Se declara que la variable STA_IF se pueda conectar a redes wifi
-        sta_if.connect('Red Alumnos', '')
+        sta_if.connect('Newton WiFi', 'losescarabajos')
         #aqui se declara primero la red a conectarse y luego la contraseña 
         while not sta_if.isconnected():
             # si no se establece ninguna conexion, dejarla pasar. 
@@ -41,11 +47,16 @@ Sensor = Pulso()
 
 temperatura = grados()
 
+fisico = actividad()
+
+
 def test():
     #se declara la funcion test para luego llamar a la funcion muestra de pulsometro.py 
     Sensor.muestra()
 def test2 ():
     temperatura.calentura()
+def test3 ():
+    fisico.movimiento()
 
 
 def categorizar_pulsaciones(pulsaciones):
@@ -81,10 +92,18 @@ def categorizar_temp(temp):
         return "Baja temperatura"
     elif temp > 37.2:
         return "Alta temperatura"
-    elif 34.1 <= temp <= 37.5:
+    elif 34 <= temp <= 37.5:
         return "Temperatura normal"
-    
 
+def categorizar_mov(estado):
+    if estado == 1:
+        return "Se produjo un resbalon"
+    elif estado == 2:
+        return "se produjo un tropezon"
+    elif estado == 3:
+        return "se produjo una caida"
+    elif estado == 4:
+        return "No ocurrio ninguna anormalidad"
 
 def mediciones():
     #Se declara la funcion mediciones 
@@ -95,14 +114,12 @@ def mediciones():
         #Se declara la variable pulsaciones, la cual almacena los datos del Sensor Bpm (pulsaciones) 
         Spo2= Sensor.datos2
         #Se declara la variable pulsaciones, la cual almacena los datos del Sensor Spo2 (Oxigeno)
-        
         temp = temperatura.datos4
-
-
+        estado = fisico.datos5
         
-        mensaje = categorizar_pulsaciones(pulsaciones), categorizar_o2(Spo2), categorizar_temp(temp) 
+        mensaje = categorizar_pulsaciones(pulsaciones), categorizar_o2(Spo2), categorizar_temp(temp), categorizar_mov(estado) 
         #Se declara la variable mensaje la cual toma los datos de pulsaciones y Spo2 y devuelve uno de los mensajes declarados arriba en las categorizaciones
-        print("Pulsaciones: ",pulsaciones," BPM", " Spo2: ",Spo2, "%", "Temperatura", temp, "°c")
+        print("Pulsaciones: ",pulsaciones," BPM", " Spo2: ",Spo2, "%", "Temperatura", temp, "°c", "Movimiento:", estado )
         #El bucle muestra lo medido en Pulsaciones y Spo2
         print(mensaje)
         #El bucle muestra el resultado de la categorizacion de Pulsaciones y Spo2
@@ -115,6 +132,8 @@ time.sleep(1)
 #El codigo espera 1 segundo para vovler a inciar la funcion mediciones
 _thread.start_new_thread(test2, ())
 time.sleep(1)
+_thread.start_new_thread(test3, ())
+time.sleep(1)
 _thread.start_new_thread(mediciones, ())
 
 def web():
@@ -123,14 +142,16 @@ def web():
     #Se vuelve a llamar a la variable pulsaciones que contiene lo medido en BPM
     Spo2= Sensor.datos2
     
-    temp = temperatura.datos4
+    tempe = temperatura.datos4
+    
+    move = fisico.datos5
     
     #Se vuelve a llamar a la variable Spo2 la cual contiene lo medido en Spo2
-    if Sensor.datos > 40 and Sensor.datos < 130 and Sensor.datos2 > 50 and Sensor.datos2 < 110 and temperatura.datos4 > 30 and temperatura.datos4 < 45:
+    if Sensor.datos > 60 and Sensor.datos < 130 and Sensor.datos2 > 40 and Sensor.datos2 < 100 and temperatura.datos4 > 33 and temperatura.datos4 < 42 and fisico.datos5 > 0 and fisico.datos5 < 5:
         #Se le dice a la funcion que SI Bpm esta ente 40 y 110 Y  que SI Spo2 esta entre 50 y 110, entonces ejecute lo siguiente
-        info = { 'PULSOS' : pulsaciones , 'OXIGENO' : Spo2 , 'TEMPERATURA' : temp}
+        info = { 'PULSOS' : pulsaciones , 'OXIGENO' : Spo2 , 'TEMPERATURA' : tempe , 'MOVIMIENTO' : move }
         #Se declara la variable info que contiene Pulsaciones y Spo2
-        g = requests.post('http://1s92.168.126.50:8080/datos', json=info)
+        g = requests.post('http://192.168.0.186:8080/datos/', json=info)
         #Se hace un request.post, el cual envia lo sensado a la pagina web en forma de json, el cual este llama a la variable info
         print (g.text)
         #Se muestra en la pantalla lo enviado a la pagina web

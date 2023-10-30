@@ -302,13 +302,13 @@ Future <void> _createPDF() async{
   row.cells[2].value= '65';
   row.cells[3].value= '65';
 
-  PdfGridRow row = grid.rows.add();
+  row = grid.rows.add();
   row.cells[0].value= '65';
   row.cells[1].value= '65';
   row.cells[2].value= '65';
   row.cells[3].value= '65';
 
-PdfGridRow row = grid.rows.add();
+  row = grid.rows.add();
   row.cells[0].value= '65';
   row.cells[1].value= '65';
   row.cells[2].value= '65';
@@ -320,9 +320,7 @@ PdfGridRow row = grid.rows.add();
   document.dispose();
   saveAndLaunchFile(bytes, 'Healthband.pdf');
 
-}
-  grid.columns.add(count: 3)
-  grid.headers.add(1);
+} 
 
 Future <Uint8List> _readImageData(String name) async{
   final data = await rootBundle.load('assets/lib/images/$name');

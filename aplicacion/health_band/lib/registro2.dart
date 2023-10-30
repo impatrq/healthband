@@ -40,7 +40,7 @@ class RegisterWidget2State extends State <RegisterView2>{
                     height: 40,
                     child: IconButton(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeView())),
                       
-                    icon: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/chevron-Agw.png'), ),
+                    icon: Icon(Icons.arrow_back, color: Colors.black,) ),
                   ),
                 ),
                 const SizedBox(width: 60,),

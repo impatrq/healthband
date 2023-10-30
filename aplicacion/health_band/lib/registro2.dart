@@ -1,33 +1,25 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:health_band/home.dart';
-import 'package:health_band//Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/registro2.dart';
-//import 'package:health_band/form_validator.dart';
-//import 'package:flutter_laravel_form_validation/flutter_laravel_form_validation.dart';
 
-class RegisterWidget1 extends StatefulWidget {
+
+class RegisterView2 extends StatefulWidget{
   static String id = 'register_page';
-  TextEditingController ctrlNumber = TextEditingController();
 
-  RegisterWidget1({super.key});
+  const RegisterView2({super.key});
   @override
- RegisterWidget1State createState() =>  RegisterWidget1State();
+ RegisterWidget2State createState() =>  RegisterWidget2State();
 }
 
-class  RegisterWidget1State extends State <RegisterWidget1> {
-  TextEditingController ctrlNumber = TextEditingController();
-  TextEditingController ctrlMail = TextEditingController();
-  TextEditingController ctrlName = TextEditingController();
-  GlobalKey <FormState> keyForm = GlobalKey <FormState>();
-  final _keyForm = GlobalKey<FormState>();
-
+class RegisterWidget2State extends State <RegisterView2>{
+  final _keyForm = GlobalKey <FormState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build (BuildContext context){
     return Scaffold(
       body: Center(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 4),
+           padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 4),
           decoration: const BoxDecoration(
               image: DecorationImage(image: AssetImage('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/backgroundbackground_registro.png',),fit: BoxFit.fill, opacity: 1),
               gradient: LinearGradient(colors:[ Color.fromRGBO(53, 169, 253, 1),Color.fromRGBO(75, 244, 244, 0.8799999952316284)])
@@ -90,7 +82,7 @@ class  RegisterWidget1State extends State <RegisterWidget1> {
                       }
                     ),
                     const SizedBox(height: 36,),
-                    buttonSubmit_1(),
+                    //buttonSubmit_1(),
                   ]
                    
                 )
@@ -99,27 +91,7 @@ class  RegisterWidget1State extends State <RegisterWidget1> {
             ],
       ),
     ),
-    )
-  );
+  ),
+);
   }
-
-    Widget buttonSubmit_1(){
-      return MaterialButton(
-        onPressed: () {
-          if(_keyForm.currentState!.validate()){ 
-            Navigator.push(context, MaterialPageRoute(
-            builder: (context) => const RegisterView2()));
-          }
-          
-
-          
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), gradient: const LinearGradient(colors: [Color.fromARGB(255, 32, 92, 166), Color.fromARGB(255, 14, 52, 96)])),
-          child: const Text('Confirmar', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),)
-            ),
-        );
-      
-    }
 }

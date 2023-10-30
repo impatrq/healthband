@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:health_band/registro1.dart';
-import 'home.dart';
-import 'opening.dart';
-
+import 'package:health_band/home.dart';
+import 'package:health_band/test.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
+import 'package:health_band/pdf_generators/home_pdf_generator.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -35,10 +36,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: RegisterWidget1.id ,
-      routes: {
-        RegisterWidget1.id :(context) => RegisterWidget1(),
-      },
+      home: const HomeView(),
     );
   }
 }

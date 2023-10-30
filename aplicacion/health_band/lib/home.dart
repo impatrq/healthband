@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-
+import 'package:syncfusion_flutter_pdf/pdf.dart';
+import 'package:health_band/pdf_generators/home_pdf_generator.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'dart:typed_data';
 
 class HomeView extends StatefulWidget {
+  static String id = 'home_page';
   const HomeView({super.key});
-
   @override
   State<HomeView> createState() => _HomeViewState();
 }
@@ -40,18 +43,18 @@ class _HomeViewState extends State<HomeView> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('Bienvenido, Nombre', style: TextStyle(color: Color.fromARGB(255, 14, 52, 96), fontSize: 19.0),),
-                  SizedBox(width: 20,),
+                  const Text('Bienvenido, Nombre', style: TextStyle(color: Color.fromARGB(255, 14, 52, 96), fontSize: 19.0),),
+                  const SizedBox(width: 20,),
                   MaterialButton(
-                    onPressed: () {}, 
+                    onPressed: _createPDF, 
                     child: Container(
-                      padding: EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),
+                      padding: const EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/info-bBM.png', width: 18.0, height: 18.0,),
-                          SizedBox(width: 8,),
-                          Text('Descargar PDF', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 10.0),),
+                          const SizedBox(width: 8,),
+                          const Text('Descargar PDF', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 10.0),),
                         ],
                       ),
                     ),
@@ -60,13 +63,13 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ],
               ),
-              SizedBox(height: 15.0,),
+              const SizedBox(height: 15.0,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    padding: EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
+                    padding: const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0), color: Colors.grey),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,31 +79,31 @@ class _HomeViewState extends State<HomeView> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/pulse-bg.png', width: 15.0, height: 15.0,),
-                          SizedBox(width: 10,),
-                          Text('Ritmo Cardíaco', style: TextStyle(color: const Color.fromARGB(255, 14, 52, 96), fontSize: 10)),
-                          SizedBox(width: 8,),
+                          const SizedBox(width: 10,),
+                          const Text('Ritmo Cardíaco', style: TextStyle(color: Color.fromARGB(255, 14, 52, 96), fontSize: 10)),
+                          const SizedBox(width: 8,),
                           IconButton(onPressed: (){}, icon: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/chevron-Agw.png', width: 8.0, height: 8.0,))
                         ]
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(width: 5,),
                           Text('X', style: TextStyle(color: Color.fromARGB(255, 14, 52, 96), fontSize: 25.0),),
                         ],
                       ),
-                      SizedBox(height: 8,)
+                      const SizedBox(height: 8,)
                       ],
                       //decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(2.0)),
                       
                       
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                   width: 10.0,
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(8.0, 0, 0.0, 0),
+                    padding: const EdgeInsets.fromLTRB(8.0, 0, 0.0, 0),
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0), color: Colors.grey),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,31 +113,31 @@ class _HomeViewState extends State<HomeView> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/pulse-bg.png', width: 15.0, height: 15.0,),
-                          SizedBox(width: 5,),
-                          Text('Oxigeno en Sangre', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 10)),
+                          const SizedBox(width: 5,),
+                          const Text('Oxigeno en Sangre', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 10)),
                           IconButton(onPressed: (){}, icon: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/chevron-Agw.png', width: 8.0, height: 8.0,))
                         ]
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(width: 5,),
                           Text('X', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 25.0),),
                         ],
                       ),
-                      SizedBox(height: 8,)
+                      const SizedBox(height: 8,)
                       ], 
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 20.0,),
+              const SizedBox(height: 20.0,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    padding: EdgeInsets.fromLTRB(8.0, 0.0, 2.0, 0.0),
+                    padding: const EdgeInsets.fromLTRB(8.0, 0.0, 2.0, 0.0),
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0), color: Colors.grey),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,29 +147,29 @@ class _HomeViewState extends State<HomeView> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/pulse-bg.png', width: 15.0, height: 15.0,),
-                          SizedBox(width: 8,),
-                          ConstrainedBox(constraints:BoxConstraints(maxWidth:70), child: Text('Temperatura Corporal', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 10))),
-                          SizedBox(width: 12.0,),
+                          const SizedBox(width: 8,),
+                          ConstrainedBox(constraints:const BoxConstraints(maxWidth:70), child: const Text('Temperatura Corporal', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 10))),
+                          const SizedBox(width: 12.0,),
                           IconButton(onPressed: (){}, icon: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/chevron-Agw.png', width: 8.0, height: 8.0,))
                         ]
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(width: 5,),
                           Text('X', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 25.0)),
                         ],
                       ),
-                      SizedBox(height: 8,)
+                      const SizedBox(height: 8,)
                       ],
                       //decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(2.0)), 
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                   width: 10.0,
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(8.0, 0, 0.0, 0),
+                    padding: const EdgeInsets.fromLTRB(8.0, 0, 0.0, 0),
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0), color: Colors.grey),
                     child: Column(
                      children: [
@@ -175,64 +178,64 @@ class _HomeViewState extends State<HomeView> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/pulse-bg.png', width: 15, height: 15,),
-                          SizedBox(width: 8),
-                          Text('Actividad', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 11),),
-                          SizedBox(width: 40,),
+                          const SizedBox(width: 8),
+                          const Text('Actividad', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 11),),
+                          const SizedBox(width: 40,),
                           IconButton(onPressed: (){}, icon: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/chevron-Agw.png', width: 8.0, height: 8.0,))
                         ]
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text('X', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 25.0),),
                         ],
                       ),
-                      SizedBox(height: 8,)
+                      const SizedBox(height: 8,)
                       ], 
                     ),
                   ),
                 ],
               ),
              
-              SizedBox(height: 30,),
+              const SizedBox(height: 30,),
               Center(
                 child: Container(
                   decoration: BoxDecoration(
                         borderRadius : BorderRadius.circular(16),
-                        color : Color.fromRGBO(218, 3, 3, 1),
+                        color : const Color.fromRGBO(218, 3, 3, 1),
                         ),
                   child: MaterialButton(
                         onPressed: () {
                           FlutterPhoneDirectCaller.callNumber('+5491126913745');
                         },
-                        padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             Container(
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 borderRadius : BorderRadius.only(
                                   topLeft: Radius.circular(8),
                                   topRight: Radius.circular(8),
                                   bottomLeft: Radius.circular(8),
                                   bottomRight: Radius.circular(8),),
                                 ),
-                              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Container(
                                     width: 20,
                                     height: 20,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       image : DecorationImage(
                                       image: AssetImage('assets/images/Info.png'),
                                       fit: BoxFit.fitWidth
                                       ),
                                     )
                                   ),
-                                  SizedBox(width : 8),
-                                  Center(
+                                  const SizedBox(width : 8),
+                                  const Center(
                                     child: Text('Emergencias', textAlign: TextAlign.center, style: TextStyle(
                                     color: Color.fromRGBO(186, 186, 186, 1),
                                     fontFamily: 'Commissioner',
@@ -265,12 +268,65 @@ class _HomeViewState extends State<HomeView> {
         });
       } ,
       currentIndex: myIndex,  
-      items: [
+      items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
         BottomNavigationBarItem(icon: Icon(Icons.alarm), label: "Alarm")
       ],),
     );
   }
+}
+
+Future <void> _createPDF() async{
+  PdfDocument document = PdfDocument();
+  document.pages.add();
+  final page = document.pages.add();
+
+  page.graphics.drawString('HealthBand', PdfStandardFont(PdfFontFamily.helvetica, 10));
+
+  PdfGrid grid = PdfGrid();
+  grid.columns.add(count: 4);
+  grid.headers.add(1);
+  grid.style = PdfGridStyle(
+    font: PdfStandardFont(PdfFontFamily.timesRoman, 25),
+    cellPadding: PdfPaddings(bottom: 2, top: 2, right: 2, left: 5));
+
+  PdfGridRow header = grid.headers[0];
+  header.cells[0].value='Pulsaciones';
+  header.cells[1].value='Oxigenacion';
+  header.cells[2].value='Movimiento';
+  header.cells[3].value='Temperatura';
+
+  PdfGridRow row = grid.rows.add();
+  row.cells[0].value= '65';
+  row.cells[1].value= '65';
+  row.cells[2].value= '65';
+  row.cells[3].value= '65';
+
+  PdfGridRow row = grid.rows.add();
+  row.cells[0].value= '65';
+  row.cells[1].value= '65';
+  row.cells[2].value= '65';
+  row.cells[3].value= '65';
+
+PdfGridRow row = grid.rows.add();
+  row.cells[0].value= '65';
+  row.cells[1].value= '65';
+  row.cells[2].value= '65';
+  row.cells[3].value= '65';
+
+  grid.draw(bounds: const Rect.fromLTWH(0, 0, 0, 0));
+
+  List <int> bytes = await document.save();
+  document.dispose();
+  saveAndLaunchFile(bytes, 'Healthband.pdf');
+
+}
+  grid.columns.add(count: 3)
+  grid.headers.add(1);
+
+Future <Uint8List> _readImageData(String name) async{
+  final data = await rootBundle.load('assets/lib/images/$name');
+  return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 }
 
 

@@ -5,6 +5,8 @@ import 'dart:async';
 
 class OpeningWidget extends StatefulWidget {
   static String id = 'opening';
+
+  const OpeningWidget({super.key});
   @override 
   _OpeningWidgetState createState() => _OpeningWidgetState();
 }
@@ -17,15 +19,15 @@ class _OpeningWidgetState extends State<OpeningWidget> {
   void initState() {
     super.initState();
     // Start a timer to control the opening frame visibility
-    Timer(Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 5), () {
       setState(() {
         opacity = 0.0; // Set opacity to 0 to make it disappear
       });
 
-      Timer(Duration(seconds: 1), () {
+      Timer(const Duration(seconds: 1), () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) {
-            return HomeView();
+            return const HomeView();
           }),
         );
       });
@@ -39,7 +41,7 @@ class _OpeningWidgetState extends State<OpeningWidget> {
                     children: [
                       AnimatedOpacity(
                       opacity: opacity,
-                      duration: Duration(seconds: 1),
+                      duration: const Duration(seconds: 1),
                       child:Stack(
                         alignment: Alignment.topCenter,
                       children: [
@@ -47,7 +49,7 @@ class _OpeningWidgetState extends State<OpeningWidget> {
                       Container(
                       width: 393.0,
                       height: 892.0,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         gradient : LinearGradient(
                         begin: Alignment(-0.718673586845398,-0.6252008676528931),
                         end: Alignment(-0.2704503536224365,1.461146354675293),

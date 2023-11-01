@@ -68,7 +68,7 @@
                     <div class="intro-content asd quienessomos-copy"><img
                             src="https://assets-global.website-files.com/64aaf98a88164330c4490176/651c5e77aa55668b308077d2_pulse-jHq.png"
                             loading="lazy" height="100" alt="" class="image-3 bpm" />
-                        <div class="text-block-4">{%for datos in valorpulso%}
+                        <div class="text-block-4" id="Pulsaciones">{%for datos in valorpulso%}
                             <li>{{datos.pulsos}} BPM</li> 
                             {% endfor %} </div>
                     </div>
@@ -81,7 +81,7 @@
                     <div class="intro-content asd quienessomos-copy"><img
                             src="https://assets-global.website-files.com/64aaf98a88164330c4490176/651c60188386d472cd1ccdf4_wind-sign-z2j.png"
                             loading="lazy" width="100" height="100" alt="" class="image-3 o2" />
-                        <div class="text-block-4">{%for datos in valorpulso%}
+                        <div class="text-block-4" id="oxigenacion">{%for datos in valorpulso%}
                             <li>{{datos.oxigenacion}} %</li> 
                             {% endfor %}</div>
                     </div>
@@ -107,7 +107,7 @@
                             loading="lazy" width="100" height="100" alt=""
                             srcset="https://assets-global.website-files.com/64aaf98a88164330c4490176/651c601829522ca4b3b2528e_sugar-cube-p-500.png 500w, https://assets-global.website-files.com/64aaf98a88164330c4490176/651c601829522ca4b3b2528e_sugar-cube.png 512w"
                             sizes="(max-width: 479px) 70vw, 100px" class="image-3 act" />
-                        <div class="text-block-4">
+                        <div class="text-block-4" id ="movimiento">
                             <li>No ocurrio ninguna anormalidad</li> 
                             </div>
                     </div>
@@ -120,7 +120,7 @@
                     <div class="intro-content asd quienessomos-copy"><img
                             src="https://assets-global.website-files.com/64aaf98a88164330c4490176/651c60187116e43800837ea3_temperature-4Fh.png"
                             loading="lazy" width="100" height="100" alt="" class="image-3 c" />
-                        <div class="text-block-4">{%for datos in valorpulso%}
+                        <div class="text-block-4" id="temperatura">{%for datos in valorpulso%}
                             <li>{{datos.temperatura}}°c</li> 
                             {% endfor %}</div>
                     </div>

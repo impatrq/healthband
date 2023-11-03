@@ -81,7 +81,7 @@ class _HomeViewState extends State<HomeView> {
         );
       });
     } else {
-      print('Error al obtener los datos del servidor');
+      print('Error al obtener los datos del servidor: ${response.statusCode}');
     }
   }
 

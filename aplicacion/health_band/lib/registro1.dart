@@ -101,14 +101,14 @@ String?  validateMobile(String? value) {
                 ),
                 const SizedBox(height: 12),
                 const Text('Si sos nuevo en HealthBand, registrate y comenzá a comenzá a controlar tu salud en simples pasos.', style: TextStyle(fontSize: 16.0),),
-                const SizedBox(height:8 ),
+                
                 Form(
                   key: _keyForm,
                   autovalidateMode: AutovalidateMode.always,
                   child: ListView(
                     shrinkWrap: true,
                   children:[
-                    const SizedBox(height: 36,),
+                    const SizedBox(height: 4,),
                     Container(
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(18), color: Colors.white),
                       padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
@@ -121,7 +121,7 @@ String?  validateMobile(String? value) {
                         padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
                         child: Example(),
                         ),
-                        SizedBox(height: 25,),
+                        SizedBox(height: 36,),
                       Container(
                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(18), color: Colors.white),
                           padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
@@ -148,7 +148,7 @@ String?  validateMobile(String? value) {
                         ),
                       ),
                       
-                      SizedBox(height: 15),
+                      SizedBox(height: 36),
                       Container(
                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(18), color: Colors.white),
                           padding: EdgeInsets.fromLTRB(8, 0, 0, 0),

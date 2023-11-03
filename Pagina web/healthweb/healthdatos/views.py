@@ -37,4 +37,6 @@ def mediciones(request):
             return JsonResponse({'message': 'Datos recibidos y almacenados exitosamente'}) 
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Error al analizar JSON'}, status=400)
+    elif request.method  == 'GET':
+        return data
     return JsonResponse({'error': 'Método no permitido'}, status=405)

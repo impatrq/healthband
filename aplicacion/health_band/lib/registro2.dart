@@ -6,14 +6,14 @@ import 'package:health_band/home.dart';
 class RegisterView2 extends StatefulWidget{
   static String id = 'register_page';
 
-  const RegisterView2({super.key});
+  RegisterView2({super.key});
   @override
  RegisterWidget2State createState() =>  RegisterWidget2State();
 }
 
 class RegisterWidget2State extends State <RegisterView2>{
   final _keyForm = GlobalKey <FormState>();
-
+  //RegisterWidget2State ()
   @override
   Widget build (BuildContext context){
     return Scaffold(

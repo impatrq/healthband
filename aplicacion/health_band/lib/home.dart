@@ -4,6 +4,49 @@ import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:health_band/pdf_generators/home_pdf_generator.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:typed_data';
+///import 'package:health_band/graphics/linear_charts.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+/*Future<Album> fetchAlbum() async {
+  final response = await http
+      .get(Uri.parse('https://healthband.com.ar/datos'));
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return Album.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load album');
+  }
+}*/
+
+class Album {
+  final int pulse;
+  final int o2;
+  final int temp;
+  final String move;
+
+  Album({
+    required this.pulse,
+    required this.o2,
+    required this.temp,
+    required this.move,
+  });
+
+  /*factory Album.fromJson(Map<String, dynamic> json) {
+    return Album(
+      pulse: json['PULSOS'] as int,
+      o2: json['OXIGENO'] as int,
+      temp: json['TEMPERATURA'] as int,
+      move: json['MOVIMIENTO']as String
+    );
+  }*/
+}
+
+void main() => runApp(const HomeView());
 
 class HomeView extends StatefulWidget {
   static String id = 'home_page';
@@ -13,10 +56,38 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  //late Future<Album> futureAlbum;
   int myIndex = 0;
+  Album ? datos;
+  @override
+  void initState() {
+    super.initState();
+    _obtenerDatos();
+    //futureAlbum = fetchAlbum();
+  }
+
+  Future<void> _obtenerDatos() async {
+    final url = 'https://healthband.vercel.app/datos/';
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> datosJson = jsonDecode(response.body);
+      setState(() {
+          datos = Album(
+          pulse: datosJson['pulsos'],
+          o2: datosJson['oxigenacion'],
+          temp: datosJson['temperatura'],
+          move: datosJson['movimiento'],
+        );
+      });
+    } else {
+      print('Error al obtener los datos del servidor');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         toolbarHeight: 80.0,
@@ -31,7 +102,8 @@ class _HomeViewState extends State<HomeView> {
           child: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/logo_hb_en_.png', width: double.infinity, height: double.infinity,),
         ),
       ),
-      body: SingleChildScrollView(
+      body: datos != null ?
+      SingleChildScrollView(
         child: Center(
           child: Container(
             width: 393.0,
@@ -85,11 +157,11 @@ class _HomeViewState extends State<HomeView> {
                           IconButton(onPressed: (){}, icon: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/chevron-Agw.png', width: 8.0, height: 8.0,))
                         ]
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(width: 5,),
-                          Text('X', style: TextStyle(color: Color.fromARGB(255, 14, 52, 96), fontSize: 25.0),),
+                          Text('${datos?.pulse}', style: TextStyle(color: Color.fromARGB(255, 14, 52, 96), fontSize: 25.0),),
                         ],
                       ),
                       const SizedBox(height: 8,)
@@ -118,11 +190,11 @@ class _HomeViewState extends State<HomeView> {
                           IconButton(onPressed: (){}, icon: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/chevron-Agw.png', width: 8.0, height: 8.0,))
                         ]
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(width: 5,),
-                          Text('X', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 25.0),),
+                          Text('${datos?.o2}', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 25.0),),
                         ],
                       ),
                       const SizedBox(height: 8,)
@@ -153,11 +225,11 @@ class _HomeViewState extends State<HomeView> {
                           IconButton(onPressed: (){}, icon: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/chevron-Agw.png', width: 8.0, height: 8.0,))
                         ]
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(width: 5,),
-                          Text('X', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 25.0)),
+                          Text('${datos?.temp}', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 25.0)),
                         ],
                       ),
                       const SizedBox(height: 8,)
@@ -184,10 +256,10 @@ class _HomeViewState extends State<HomeView> {
                           IconButton(onPressed: (){}, icon: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/chevron-Agw.png', width: 8.0, height: 8.0,))
                         ]
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text('X', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 25.0),),
+                          Text('${datos?.move}', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 25.0),),
                         ],
                       ),
                       const SizedBox(height: 8,)
@@ -261,7 +333,7 @@ class _HomeViewState extends State<HomeView> {
           ),
           
         ),
-      ),
+      ) : Center(child: CircularProgressIndicator()),
       bottomNavigationBar: BottomNavigationBar(onTap:(index) {
         setState((){
           myIndex = index;
@@ -273,6 +345,8 @@ class _HomeViewState extends State<HomeView> {
         BottomNavigationBarItem(icon: Icon(Icons.alarm), label: "Alarm")
       ],),
     );
+    
+    
   }
 }
 

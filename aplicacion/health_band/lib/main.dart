@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:health_band/home.dart';
+import 'package:health_band/oxi.dart';
+import 'package:health_band/pulse.dart';
+import 'package:health_band/registro1.dart';
+import 'package:health_band/registro2.dart';
+import 'temp.dart';
 import 'package:health_band/profile.dart';
 import 'package:health_band/test.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:health_band/pdf_generators/home_pdf_generator.dart';
+//import 'package:health_band/graphics/linear_charts.dart';
+import 'activity.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -37,7 +44,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyProfile(),
+      home: RegisterWidget1(),
     );
   }
 }

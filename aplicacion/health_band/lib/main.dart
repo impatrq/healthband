@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:health_band/home.dart';
+import 'package:health_band/example_fetching.dart';
+//import 'package:health_band/home.dart';
 import 'package:health_band/oxi.dart';
 import 'package:health_band/pulse.dart';
 import 'package:health_band/registro1.dart';
@@ -12,12 +13,27 @@ import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:health_band/pdf_generators/home_pdf_generator.dart';
 //import 'package:health_band/graphics/linear_charts.dart';
 import 'activity.dart';
-void main() {
-  runApp(const MyApp());
+import 'package:health_band/new_test_home.dart';
+import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:health_band/utils.dart';
+
+Future <void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize( url: 'https://bhqahbhnapapcazmqnkg.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJocWFoYmhuYXBhcGNhem1xbmtnIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTE0NjYsImV4cCI6MjAxMzY2NzQ2Nn0.o8plzbWgGL7cB7hRoypxtI3sXmjZq6t3hceXksV67U4');
+    runApp(MultiProvider
+    (providers: [ChangeNotifierProvider<AppService>(
+      create: (_) => AppService(),
+      )
+      ],
+     child: const MyApp(),
+      )
+    );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}): super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -44,7 +60,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 51, 49, 97)),
         useMaterial3: true,
       ),
-      home: HomeView(),
+      home: ExFetch(),
     );
   }
 }

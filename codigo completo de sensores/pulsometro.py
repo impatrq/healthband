@@ -52,7 +52,8 @@ class Pulso():
         beat = False
         beats = 0
         
-
+        o2_list = []
+        final = 0
         
         while True:
             # The check() method has to be continuously polled, to check if
@@ -69,10 +70,14 @@ class Pulso():
                 red_reading = sensor.pop_red_from_storage()
                 ir_reading = sensor.pop_ir_from_storage()
                 
-                valueir = ir_reading
+                for _ in range (5):
+                    oxy = ir_reading * 0.009 # factor de conversion aproximado calculado para el Spo2
+                    o2_list.append(oxy)
+                    
                 valuered = red_reading
                 
-                Spo2 = valueir * 0.009 # factor de conversion aproximado calculado para el Spo2
+                Spo2 =  sum(o2_list) / len(o2_list)
+                o2_list.clear()
                 self.datos2 = Spo2
                 
                 history.append(valuered)

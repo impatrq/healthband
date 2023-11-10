@@ -2,7 +2,7 @@ from imu import MPU6050
 from time import sleep
 from machine import Pin, I2C, RTC, SoftI2C
 
-i2c = SoftI2C(sda=Pin(21), scl=Pin(22), freq=400000)
+i2c = I2C(sda=Pin(21), scl=Pin(22), freq=400000)
 imu = MPU6050(i2c)
 
 info_actividad = {}

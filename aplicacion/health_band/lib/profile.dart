@@ -28,19 +28,6 @@ class _MyProfileState extends State<MyProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        toolbarHeight: 80.0,
-        centerTitle: true,
-        flexibleSpace: Container(
-          width: 393.0,
-          padding: const EdgeInsets.fromLTRB(60.0, 50.0, 60.0, 10.0),
-          alignment: Alignment.center,
-          decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 14, 52, 96),
-          ),
-          child: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/logo_hb_en_.png', width: double.infinity, height: double.infinity,),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Center(
           child: Container(
@@ -60,17 +47,17 @@ class _MyProfileState extends State<MyProfile> {
                               radius: 65,
                               backgroundImage: MemoryImage(_image!),
                             ) :
-                             CircleAvatar(
+                             const CircleAvatar(
                             radius: 65,
                             backgroundImage: NetworkImage('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/1144760.png'),
                           ),
                              Positioned(child:IconButton(onPressed: selectImage , icon: Icon(Icons.add_a_photo),), bottom: -10, left: 80,),
                           ],
                         ),
-                        SizedBox(height: 20,),
-                        Text('Usuario', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400, color: Colors.amber),),
-                        SizedBox(height: 35,),
-                        Column(
+                        const SizedBox(height: 20,),
+                        const Text('Usuario', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400, color: Colors.amber),),
+                        const SizedBox(height: 35,),
+                        const Column(
                           children: [
                             Text('Información Personal', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: Colors.amber),),
                             SizedBox(height: 20,),
@@ -123,16 +110,6 @@ class _MyProfileState extends State<MyProfile> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(onTap:(index) {
-        setState((){
-          myIndex = index;
-        });
-      } ,
-      currentIndex: myIndex,  
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.alarm), label: "Alarm")
-      ],),
     );
   }
 }

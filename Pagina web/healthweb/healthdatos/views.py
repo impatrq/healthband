@@ -39,6 +39,8 @@ def mediciones(request):
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Error al analizar JSON'}, status=400)
     elif request.method  == 'GET':
-        data = json.loads(request.body)
-        return data
+        pulsaciones = request.POST('PULSOS')
+        oxigenacion = request.POST('OXIGENO')
+        temperatura = request.POST('TEMPERATURA')
+        movimiento = request.POST('MOVIMIENTO')
     return JsonResponse({'error': 'Método no permitido'}, status=405)

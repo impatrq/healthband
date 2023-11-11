@@ -6,9 +6,9 @@ import 'package:health_band/pdf_generators/home_pdf_generator.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:typed_data';
 ///import 'package:health_band/graphics/linear_charts.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:dio/dio.dart';
+//import 'package:http/http.dart' as http;
+//import 'dart:convert';
+//import 'package:dio/dio.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:health_band/utils.dart';
 import 'package:provider/provider.dart';
@@ -333,7 +333,8 @@ class _HomeViewState extends State<HomeView> {
                 ),
       
                 //BotondeemergenciasWidget()
-              ],)
+              ],
+              )
             ),
             
           ),

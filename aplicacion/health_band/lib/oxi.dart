@@ -29,7 +29,7 @@ class _O2LineChartState extends State<O2LineChart> {
           alignment: Alignment.center,
           decoration: const BoxDecoration(
             color: Color.fromARGB(255, 14, 52, 96),
-            image: DecorationImage(image:AssetImage('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/aire pattern.png'), opacity: 0.1, fit: BoxFit.fill )
+            //image: DecorationImage(image:AssetImage('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/aire pattern.png'), opacity: 0.1, fit: BoxFit.fill )
           ),
         ),
         title: Text('Oxígeno en Sangre', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w300),),

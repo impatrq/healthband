@@ -1,14 +1,44 @@
+import 'dart:io';
+//import 'dart:js';
+import 'dart:typed_data';
+import 'package:http/retry.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pdf_wdgts;
 import 'package:flutter/material.dart';
-import 'dart:convert'; // for JSON decoding
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:health_band/pdf_generators/home_pdf_generator.dart';
+//import 'dart:convert'; // for JSON decoding
 import 'package:supabase/supabase.dart'; // import Supabase library
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'profile.dart';
+//import 'package:health_band/pdfs/pdf_class.dart';
+//import 'package:health_band/pdfs/pdf_class.dart';
+
+
 
 void main() {
-  runApp(ExFetch());
+  runApp(const ExFetch());
 }
 
-class ExFetch extends StatelessWidget {
+class ExFetch extends StatefulWidget {
+
+  const ExFetch({super.key});
+
+  @override
+  State<ExFetch> createState() => _ExFetchState();
+}
+
+class _ExFetchState extends State<ExFetch> {
+  //int myIndex = 0;
+  final PageController pageController = PageController();
+  final pdf = pdf_wdgts.Document();
   final SupabaseClient supabaseClient = SupabaseClient('https://bhqahbhnapapcazmqnkg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJocWFoYmhuYXBhcGNhem1xbmtnIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTE0NjYsImV4cCI6MjAxMzY2NzQ2Nn0.o8plzbWgGL7cB7hRoypxtI3sXmjZq6t3hceXksV67U4');
-  
+
   Future<List<dynamic>> fetchData() async {
     // Fetch data from Supabase table
     final response = await supabaseClient
@@ -16,88 +46,537 @@ class ExFetch extends StatelessWidget {
       .select('id, pulsos, oxigenacion, time, movimiento,temperatura')
       .order('time', ascending: false)
       .limit(1);
-
       // Parse JSON data
-      
       return response ;
   }
+  @override
+  void dispose() {
+    super.dispose();
+    pageController.dispose();
+  }
 
+
+  /*Future<Uint8List> makePdf(Pdf ficha) async {
+                      final pdf = pdf_wdgts. Document();
+                      pdf.addPage(
+                        pdf_wdgts. Page(
+                          pageFormat: PdfPageFormat.a4,
+                        build: (context) {
+                          return  Column(
+                            children: [
+                              SizedBox(height: 25,),
+                              Table(
+                              border: TableBorder.all(color: Colors.black),
+                              children: [
+                                TableRow(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(20),
+                                      child: Text('Ritmo Cardíaco'),
+                                      ) ,
+                                    Padding(
+                                      padding: EdgeInsets.all(20),
+                                      child: Text(ficha.pulsos.toString()),
+                                      )
+                                      ],
+                                  ),
+                                TableRow(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(20),
+                                      child: Text('Oxigenación en Sangre'),
+                                      ) ,
+                                    Padding(
+                                      padding: EdgeInsets.all(20),
+                                      child: Text(ficha.o2.toString()),
+                                      )
+                                      ],
+                                  ),
+                                  TableRow(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(20),
+                                      child: Text('Temperatura Corporal'),
+                                      ) ,
+                                    Padding(
+                                      padding: EdgeInsets.all(20),
+                                      child: Text(ficha.temp.toString()),
+                                      )
+                                      ],
+                                  ),
+                                  TableRow(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(20),
+                                      child: Text('Movimiento'),
+                                      ) ,
+                                    Padding(
+                                      padding: EdgeInsets.all(20),
+                                      child: Text(ficha.mov.toString()),
+                                      )
+                                      ],
+                                  ),
+                              ],
+                            ),
+                            ]
+                          );
+                          }
+                        ) as pdf_wdgts.Page
+                      );
+                      return pdf.save();
+                        }*/
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Supabase Data'),
-        ),
-        body: FutureBuilder(
-          future: fetchData(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
-            } else if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            } else {
-              final dataList = snapshot.data;
-              final data = dataList?[0];
-              MapEntry data2 = data.entries.firstWhere((entry) => entry.key == "pulsos");
-              MapEntry data3 = data.entries.firstWhere((entry) => entry.key == "oxigenacion");
-              MapEntry data4 = data.entries.firstWhere((entry) => entry.key == "temperatura");
-              MapEntry data5 = data.entries.firstWhere((entry) => entry.key == "movimiento");
-              //String pulsos = jsonData?['pulsos'];
-              return Scaffold(
-                body: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-                  child: Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                      Row(children: [
-                      Container(padding:EdgeInsets.symmetric(horizontal: 5, vertical: 5),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)), 
-                      child: Column(
-                        children:[ Row(
-                          children: [
-                            Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/pulse-bg.png', width: 5,height: 5,),
-                            Text('Ritmo Cardíaco', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 7, color: Colors.blue),),
-                            IconButton(onPressed: () => {}, icon:Icon(Icons.arrow_forward_ios, size:5,) )
-                          ],
-                        ),
-                          SizedBox(height: 3,),
-                          Row(
-                          children: [Text('${data2.value}', style: TextStyle(fontWeight: FontWeight.w400, color: Colors.blue),)])])),
-                      SizedBox(width: 15,),
-                      Container(padding:EdgeInsets.symmetric(horizontal: 5, vertical: 5),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)),child: Text('Oxígeno en Sangre: ${data3.value}',style: TextStyle(fontWeight: FontWeight.w400, color: Colors.blue), )),
-                      ],
-                      ),
-                      SizedBox(height: 15,),
-                      Row(children:[
-                        Container(padding:EdgeInsets.symmetric(horizontal: 5, vertical: 5),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)),
-                        child: Column(children:[ 
-                          Row(),
-                              
-                          SizedBox(height: 15,),
-                              
-                          Row(children: [Text('Temperatura: ${data4.value}',style: TextStyle(fontWeight: FontWeight.w400, color: Colors.blue),)])])
-                          ),
-                        
-                        SizedBox(width: 15,),
-                              
-                        Container(padding:EdgeInsets.symmetric(horizontal: 5, vertical: 5),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)),
-                        child: Column(children:[ 
-                          Row(),
-                              
-                          SizedBox(height: 15,),
-                              
-                          Row(children: [Text('movimiento: ${data5.value}',style: TextStyle(fontWeight: FontWeight.w400, color: Colors.blue),)])])),
-                      ]
-                      )
-                      ]),
-                  ),
-                ),
-              );
-            }
-          },
+        toolbarHeight: 80.0,
+        centerTitle: true,
+        flexibleSpace: Container(
+          width: 393.0,
+          padding: const EdgeInsets.fromLTRB(60.0, 50.0, 60.0, 10.0),
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 14, 52, 96),
+          ),
+          child: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/logo_hb_en_.png', width: double.infinity, height: double.infinity,),
         ),
       ),
+        body:Container(
+          //padding: const EdgeInsets.fromLTRB(25, 10, 25, 5),
+          //constraints: BoxConstraints(maxWidth: 393),
+          child: FutureBuilder(
+                  future: fetchData(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      final dataList = snapshot.data as List<dynamic>?;
+                      final data = dataList?[0];
+                      MapEntry data2 = data.entries.firstWhere((entry) => entry.key == "pulsos");
+                      MapEntry data3 = data.entries.firstWhere((entry) => entry.key == "oxigenacion");
+                      MapEntry data4 = data.entries.firstWhere((entry) => entry.key == "temperatura");
+                      MapEntry data5 = data.entries.firstWhere((entry) => entry.key == "movimiento");
+                      //final ficha = Pdf(pulsos: data2 as double, o2: data3 as double, temp: data4 as int, mov: data5 as String?);
+          
+                      //String pulsos = jsonData?['pulsos'];
+                      final PageController pageController = PageController();
+                      return  PageView(
+                          controller: pageController,
+                          children: [Container(
+                            width: 393, height: 713,
+                            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                            child: Column(
+                              children:[ 
+                                const SizedBox(height: 15,),
+                                  Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          const Text('Bienvenido a HealthBand', style: TextStyle(color: Color.fromARGB(255, 14, 52, 96), fontSize: 16.0, fontWeight: FontWeight.w500),),
+                                          const SizedBox(width: 10,),
+                                          MaterialButton(
+                                            onPressed: () async{
+                                              Future _createPDF() async{
+                                              final document = pdf_wdgts.Document();
+                                                    document.addPage(
+                                                      pdf_wdgts.Page(
+                                                        build: (context) {
+                                                          return pdf_wdgts.Container(
+                                                            child: pdf_wdgts.Center(child: 
+                                                              pdf_wdgts.Stack(children: [
+                                                              pdf_wdgts.Text('Ficha Médica'),
+                                                              pdf_wdgts.SizedBox(height: 35),
+                                                              pdf_wdgts.Column(
+                                                              mainAxisAlignment:pdf_wdgts.MainAxisAlignment.spaceAround,
+                                                              children: [
+                                                                pdf_wdgts.Text("Ritmo cardíaco", style:const pdf_wdgts.TextStyle()),
+                                                                pdf_wdgts.Text("Oxigenación en Sangre", style:const pdf_wdgts.TextStyle()),
+                                                                pdf_wdgts.Text("Temperatura Corporal", style:const pdf_wdgts.TextStyle()),
+                                                                pdf_wdgts.Text("Actividad", style:const pdf_wdgts.TextStyle()),
+                                                              ]
+                                                            ),
+                                                              pdf_wdgts.Column(
+                                                                mainAxisAlignment: pdf_wdgts.MainAxisAlignment.spaceAround,
+                                                                children: [
+                                                                  pdf_wdgts.Text(data2.toString(), style:pdf_wdgts.TextStyle()),
+                                                                  pdf_wdgts.Text(data3.toString(), style:pdf_wdgts.TextStyle()),
+                                                                  pdf_wdgts.Text(data4.toString(), style:pdf_wdgts.TextStyle()),
+                                                                  pdf_wdgts.Text(data5.toString(), style:pdf_wdgts.TextStyle()),
+                                                                ],
+                                                              ),
+                                                              pdf_wdgts.SizedBox(height: 35),
+                                                               pdf_wdgts.Text('HealthBand Aid'),
+                                                            ])
+                                                            )
+                                                            
+                                                            
+                                                          );
+                                                        }, 
+                                                    )
+                                                  );
+                                                  return saveDocument(name: 'hb_ficha_medica.pdf', pdf: document);
+                                                  }
+                                                  final pdfFile = await _createPDF();
+                                                  openFile(pdfFile);
+                                                },
+                                            child: Container(
+                                              padding: const EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),
+                                              child: Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  //Image.asset('assets/images/info-bBM.png', width: 18.0, height: 18.0,),
+                                                  const SizedBox(width: 8,),
+                                                  TextButton(onPressed: () async{
+                                                    Future  _createPDF() async{
+                                                    final document = pdf_wdgts.Document();
+                                                    document.addPage(
+                                                      pdf_wdgts.Page(
+                                                        build: (context) {
+                                                          return pdf_wdgts.Container(
+                                                            child: pdf_wdgts.Center(child: 
+                                                              pdf_wdgts.Stack(children: [
+                                                              pdf_wdgts.Text('Ficha Médica'),
+                                                              pdf_wdgts.SizedBox(height: 35),
+                                                              pdf_wdgts.Column(
+                                                              mainAxisAlignment:pdf_wdgts.MainAxisAlignment.spaceAround,
+                                                              children: [
+                                                                pdf_wdgts.Text("Ritmo cardíaco", style:const pdf_wdgts.TextStyle()),
+                                                                pdf_wdgts.SizedBox(height: 2),
+                                                                pdf_wdgts.Text("Oxigenación en Sangre", style:const pdf_wdgts.TextStyle()),
+                                                                pdf_wdgts.SizedBox(height: 2),
+                                                                pdf_wdgts.Text("Temperatura Corporal", style:const pdf_wdgts.TextStyle()),
+                                                                pdf_wdgts.SizedBox(height: 2),
+                                                                pdf_wdgts.Text("Actividad", style:const pdf_wdgts.TextStyle()),
+                                                                pdf_wdgts.SizedBox(height: 2),
+                                                              ]
+                                                            ),
+                                                              pdf_wdgts.Column(
+                                                                mainAxisAlignment: pdf_wdgts.MainAxisAlignment.spaceAround,
+                                                                children: [
+                                                                  pdf_wdgts.Text(data2.toString(), style:pdf_wdgts.TextStyle()),
+                                                                  pdf_wdgts.SizedBox(height: 2),
+                                                                  pdf_wdgts.Text(data3.toString(), style:pdf_wdgts.TextStyle()),
+                                                                  pdf_wdgts.SizedBox(height: 2),
+                                                                  pdf_wdgts.Text(data4.toString(), style:pdf_wdgts.TextStyle()),
+                                                                  pdf_wdgts.SizedBox(height: 2),
+                                                                  pdf_wdgts.Text(data5.toString(), style:pdf_wdgts.TextStyle()),
+                                                                ],
+                                                              ),
+                                                              pdf_wdgts.SizedBox(height: 35),
+                                                               pdf_wdgts.Text('HealthBand Aid'),
+                                                            ])
+                                                            )
+                                                            
+                                                            
+                                                          );
+                                                        }
+                                                      )
+                                                    );
+                                                    return saveDocument(name: 'hb_ficha_medica.pdf', pdf: document);
+                                                  }
+                                                  final pdfFile = await _createPDF();
+                                                  openFile(pdfFile);
+                                                  },
+                                                  child: const Text('Descargar PDF', style: TextStyle(color:  Color.fromARGB(255, 14, 52, 96), fontSize: 9.0),)),
+                                                ],
+                                              ),
+                                            ),
+                                          //AssetImage('assets/images/info-bBM.png')
+                                
+                                          ),
+                                        ],
+                                      ),
+                                      
+                                      Row(
+                                        children:[ Column(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Center(
+                                              child: Container(constraints: BoxConstraints(maxWidth: 393),
+                                                width: double.infinity,
+                                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: [
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        Container(width: 160, height: 90, padding:const EdgeInsets.fromLTRB(8, 4, 8, 3),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)), 
+                                                        child: Column(
+                                                          //crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children:[ 
+                                                            Row(
+                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            children: [
+                                                              //Image.asset('assets/images/pulse-bg.png', width: 5,height: 5,),
+                                                              const Text('Ritmo Cardíaco', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12, color: Color.fromARGB(255, 14, 52, 96)),),
+                                                              IconButton(onPressed: () => {}, icon:const Icon(Icons.arrow_forward_ios, size:5,) )
+                                                            ],
+                                                          ),
+                                                            const SizedBox(height: 7,),
+                                                            Row(
+                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                            children: [
+                                                              Text('${data2.value} BPM', style: const TextStyle(fontWeight: FontWeight.w400, color: Color.fromARGB(255, 14, 52, 96)),)])])),
+                                                              const SizedBox(width: 18,),
+                                                        Container(width: 150,height: 90, padding:const EdgeInsets.fromLTRB(8, 7, 4, 3),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)),
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children:[ 
+                                                          Row(children:[
+                                                            //Image.asset('assets/images/aire pattern.png', width: 7,height: 7,),
+                                                            const Text('Oxigenación en Sangre',style: TextStyle(fontWeight: FontWeight.w400, fontSize: 10, color: Color.fromARGB(255, 14, 52, 96)),),
+                                                            IconButton(onPressed: () => {}, icon:const Icon(Icons.arrow_forward_ios, size:7,) )
+                                                          ]
+                                                            
+                                                          ),
+                                                      const SizedBox(height: 7,),
+                                                      Text('${data3.value} %',style: const TextStyle(fontWeight: FontWeight.w400, color: Color.fromARGB(255, 14, 52, 96)),)
+                                                      ]
+                                                      )
+                                                      ),
+                                                    ],
+                                                    ),
+                                                    const SizedBox(height: 20,),
+                                                    Row(
+                                                      children: [
+                                                      Container(width:160,height:90 ,padding:const EdgeInsets.fromLTRB(8, 7, 4, 3),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)),
+                                                      child: Column(
+                                                        children:[ 
+                                                        Row(
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            //Image.asset('assets/images/termometro pattern.png', width: 7, height: 7,),
+                                                            const Text('Temperatura Corporal', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 10, color: Color.fromARGB(255, 14, 52, 96)),),
+                                                            IconButton(onPressed: () => {}, icon:const Icon(Icons.arrow_forward_ios, size:5,) )
+                                                          ],
+                                                        ),
+                                                            
+                                                        const SizedBox(height: 10,),
+                                                            
+                                                        Row(mainAxisAlignment: MainAxisAlignment.start,
+                                                          children: [
+                                                          Text('${data4.value} °C',style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 12, color: Color.fromARGB(255, 14, 52, 96)),)
+                                                          ]
+                                                          )
+                                                          ]
+                                                          )
+                                                        ),
+                                                      
+                                                      const SizedBox(width: 18,),
+                                                            
+                                                      Container(width: 160, height:90, padding:const EdgeInsets.fromLTRB(8, 7, 4, 3),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)),
+                                                      child: Column(children:[ 
+                                                        Row(
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween ,
+                                                          children: [
+                                                            //Image.asset('assets/images/actividad pattern.png', width: 5, height: 5,),
+                                                            const Text('Actividad', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12, color: Color.fromARGB(255, 14, 52, 96)),),
+                                                            IconButton(onPressed: () => {}, icon:const Icon(Icons.arrow_forward_ios, size:9,) )
+                                                          ],
+                                                        ),
+                                                            
+                                                        const SizedBox(height: 10,),
+                                                            
+                                                        Row(children: [Text('${data5.value}',style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 10, color: Color.fromARGB(255, 14, 52, 96)),)])])),
+                                                    ]
+                                                    ),
+                                                  
+                                                    const SizedBox(height: 50,),
+                                              Container(
+                                                padding:const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+                                                decoration: BoxDecoration(
+                                                      borderRadius : BorderRadius.circular(22),
+                                                      color : const Color.fromRGBO(218, 3, 3, 1),
+                                                      ),
+                                                child: MaterialButton(
+                                                      onPressed: () {
+                                                        print('Emergencias');
+                                                        //FlutterPhoneDirectCaller.callNumber('+5491126913745');
+                                                      },
+                                                      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                                                      child: Row(
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        children: <Widget>[
+                                                          Container(
+                                                            decoration: const BoxDecoration(
+                                                              borderRadius : BorderRadius.only(
+                                                                topLeft: Radius.circular(12),
+                                                                topRight: Radius.circular(12),
+                                                                bottomLeft: Radius.circular(12),
+                                                                bottomRight: Radius.circular(12),),
+                                                              ),
+                                                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                                            child: Row(
+                                                              mainAxisSize: MainAxisSize.min,
+                                                              children: <Widget>[
+                                                                Container(
+                                                                  width: 20,
+                                                                  height: 20,
+                                                                  decoration: const BoxDecoration(
+                                                                    //image : DecorationImage(
+                                                                    //image: AssetImage('assets/images/Info.png'),
+                                                                    //fit: BoxFit.fitWidth
+                                                                  // ),
+                                                                  )
+                                                                ),
+                                                                const SizedBox(width : 8),
+                                                                const Center(
+                                                                  child: Text('Emergencias', textAlign: TextAlign.center, style: TextStyle(
+                                                                  color: Color.fromRGBO(186, 186, 186, 1),
+                                                                  fontFamily: 'Commissioner',
+                                                                  fontSize: 11,
+                                                                  letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                                                  fontWeight: FontWeight.normal,
+                                                                  height: 1
+                                                                  ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                
+                                                              ],
+                                                            ),
+                                                          ),
+                                            
+                                            ),
+                                            
+                                            
+                                                    ]
+                                                    
+                                                    ),
+                                                ),
+                                            ),
+                                          ]
+                                        ),
+                                        ]
+                                      )
+                              ]
+                            )
+                          )
+                          ]
+                      );
+                                      
+                      }
+                    },
+                ),
+        ),
+              
+            ),
+          
+        
+        
+      
     );
   }
 }
+  
+  fetchData() async {
+    final SupabaseClient supabaseClient = SupabaseClient('https://bhqahbhnapapcazmqnkg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJocWFoYmhuYXBhcGNhem1xbmtnIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTE0NjYsImV4cCI6MjAxMzY2NzQ2Nn0.o8plzbWgGL7cB7hRoypxtI3sXmjZq6t3hceXksV67U4');
+    final response = await supabaseClient
+      .from('healthdatos_datos')
+      .select('id, pulsos, oxigenacion, time, movimiento,temperatura')
+      .order('time', ascending: false)
+      .limit(1);
+      // Parse JSON data
+      return response ;
+
+  }
+
+  Future <File> saveDocument({
+    required String name,
+    required pdf_wdgts.Document pdf,
+  }) async {
+    final data = await fetchData();
+    if (data.isNotEmpty){
+      print("PDF Generado");
+      final bytes = await pdf.save();
+      final dir = await getApplicationDocumentsDirectory();
+       File file = File('${dir.path}/$name');
+       await file.writeAsBytes(bytes);
+      return file;
+    }
+    else{
+      print("No se genero el PDF");
+      return 'No se generó el PDF' as Future<File>;
+    }
+  }
+
+  Future openFile(File file) async{
+    final url = file.path;
+    await OpenFile.open(url);
+  }
+
+/*Future <void> _createPDF() async{
+  final document = pdf_wdgts.Document();
+  document.addPage(
+    Page(build :(context)){
+      return const Column(
+      children:[
+        Text('HealthBand')
+      ]
+    );
+    } as pdf_wdgts.Page
+    
+  );
+
+  Directory root = await getApplicationDocumentsDirectory();
+  String dirPath = '${root.path}/healthband_ficha.pdf';
+  final file = File('$dirPath/healthband_ficha.pdf');
+  await file.writeAsBytes(await document.save());
+  print('Path: '+ dirPath);
+  /*final page = document.pages.add();
+
+  page.graphics.drawString('HealthBand', PdfStandardFont(PdfFontFamily.helvetica, 10));
+
+  PdfGrid grid = PdfGrid();
+  grid.columns.add(count: 4);
+  grid.headers.add(1);
+  grid.style = PdfGridStyle(
+    font: PdfStandardFont(PdfFontFamily.timesRoman, 25),
+    cellPadding: PdfPaddings(bottom: 2, top: 2, right: 2, left: 5));
+
+  PdfGridRow header = grid.headers[0];
+  header.cells[0].value='Pulsaciones';
+  header.cells[1].value='Oxigenacion';
+  header.cells[2].value='Movimiento';
+  header.cells[3].value='Temperatura';
+
+  PdfGridRow row = grid.rows.add();
+  row.cells[0].value= '65';
+  row.cells[1].value= '65';
+  row.cells[2].value= '65';
+  row.cells[3].value= '65';
+
+  row = grid.rows.add();
+  row.cells[0].value= '65';
+  row.cells[1].value= '65';
+  row.cells[2].value= '65';
+  row.cells[3].value= '65';
+
+  row = grid.rows.add();
+  row.cells[0].value= '65';
+  row.cells[1].value= '65';
+  row.cells[2].value= '65';
+  row.cells[3].value= '65';
+
+  grid.draw(bounds: const Rect.fromLTWH(0, 0, 0, 0));
+
+  List <int> bytes = await document.save();
+  document.dispose();
+  saveAndLaunchFile(bytes, 'Healthband.pdf');*/
+
+} */
+
+Future <Uint8List> _readImageData(String name) async{
+  final data = await rootBundle.load('assets/lib/images/$name');
+  return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+}
+
+
+

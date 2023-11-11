@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:health_band/bottomnavbar.dart';
+import 'package:health_band/src/providers/provider.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:health_band/example_fetching.dart';
 //import 'package:health_band/home.dart';
 import 'package:health_band/oxi.dart';
@@ -17,9 +20,24 @@ import 'package:health_band/new_test_home.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:health_band/utils.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
+/*void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+OneSignal.initialize("<cc6a0abf-eee1-4a36-962b-573eb95a0066>");
+//OneSignal.shared.SetLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+//OneSignal.shared.promptUserForPushNotificationPermission().then((accepted){
+ // print ('Accepted Permssion: $accepted');});
+  runApp(MyApp());
+}*/
+
+//class MyApp extends StatelessWidget {
 Future <void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await Supabase.initialize( url: 'https://bhqahbhnapapcazmqnkg.supabase.co',
     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJocWFoYmhuYXBhcGNhem1xbmtnIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTE0NjYsImV4cCI6MjAxMzY2NzQ2Nn0.o8plzbWgGL7cB7hRoypxtI3sXmjZq6t3hceXksV67U4');
     runApp(MultiProvider
@@ -32,9 +50,20 @@ Future <void> main() async{
     );
 }
 
-class MyApp extends StatelessWidget {
+
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}): super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+@override
+void initState(){
+ //final pushProvider = new PushNotificationProvider();
+  //pushProvider.initNotifications();
+}
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -57,15 +86,15 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 51, 49, 97)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 51, 49, 97)),
         useMaterial3: true,
       ),
-      home: ExFetch(),
+      home: MyBottomNavBar(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+/*class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -83,7 +112,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+/*class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -95,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -152,3 +181,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+}*/

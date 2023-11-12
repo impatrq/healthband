@@ -40,7 +40,8 @@ class _ExFetchState extends State<ExFetch> {
   final PageController pageController = PageController();
   final pdf = pdf_wdgts.Document();
   final SupabaseClient supabaseClient = SupabaseClient('https://bhqahbhnapapcazmqnkg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJocWFoYmhuYXBhcGNhem1xbmtnIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTE0NjYsImV4cCI6MjAxMzY2NzQ2Nn0.o8plzbWgGL7cB7hRoypxtI3sXmjZq6t3hceXksV67U4');
-  String number = 1126913745.toString();
+  //final number = '+5491126913745';
+  final Uri phone_number = Uri.parse('tel: +54-9-11-2691-3745');
 
   Future<List<dynamic>> fetchData() async {
     // Fetch data from Supabase table
@@ -63,7 +64,7 @@ class _ExFetchState extends State<ExFetch> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        /*appBar: AppBar(
+        appBar: AppBar(
         toolbarHeight: 80.0,
         centerTitle: true,
         flexibleSpace: Container(
@@ -75,7 +76,7 @@ class _ExFetchState extends State<ExFetch> {
           ),
           child: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/logo_hb_en_.png', width: double.infinity, height: double.infinity,),
         ),
-      ),*/
+      ),
         body:FutureBuilder(
                     future: fetchData(),
                     builder: (context, snapshot) {
@@ -363,9 +364,11 @@ class _ExFetchState extends State<ExFetch> {
                                                                 color : const Color.fromRGBO(218, 3, 3, 1),
                                                                 ),
                                                           child: MaterialButton(
-                                                                onPressed: () {
+                                                                onPressed: () async{
                                                                   print('Emergencias');
-                                                                 launchDialer(number);
+                                                                  print(await canLaunchUrl(phone_number));
+                                                                  //await FlutterPhoneDirectCaller.callNumber(number);
+                                                                 //launchDialer(number);
                                                                   //FlutterPhoneDirectCaller.callNumber('+5491126913745');
                                                                 },
                                                                 padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),

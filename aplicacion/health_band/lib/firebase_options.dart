@@ -44,38 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAl6Ld4mIeJcOE_l4tXWt0HLMyIlkdUPQE',
-    appId: '1:98531808956:web:e8ee478e0a2cff934662b9',
-    messagingSenderId: '98531808956',
-    projectId: 'healthband-910f9',
-    authDomain: 'healthband-910f9.firebaseapp.com',
-    storageBucket: 'healthband-910f9.appspot.com',
-    measurementId: 'G-CK5DJNYKQN',
+    apiKey: 'AIzaSyClEyCpvyHWJh7emzeoaTas9wmL8sJW2QI',
+    appId: '1:150511519613:web:c8f3822b050a8839f52e14',
+    messagingSenderId: '150511519613',
+    projectId: 'hband-3a540',
+    authDomain: 'hband-3a540.firebaseapp.com',
+    storageBucket: 'hband-3a540.appspot.com',
+    measurementId: 'G-PRPVDMGR83',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBoAHyne7OqdQvelda5PsDIL2p5NbfZhiU',
-    appId: '1:98531808956:android:c89d29eec2eaadfe4662b9',
-    messagingSenderId: '98531808956',
-    projectId: 'healthband-910f9',
-    storageBucket: 'healthband-910f9.appspot.com',
+    apiKey: 'AIzaSyDU0D3_7PVDr51Du2sll5dd2YIjFNUkcDA',
+    appId: '1:150511519613:android:ae36bebdecb64765f52e14',
+    messagingSenderId: '150511519613',
+    projectId: 'hband-3a540',
+    storageBucket: 'hband-3a540.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAjqedA-LS-WhCI1LNpfahGI7cuTgRtWrI',
-    appId: '1:98531808956:ios:f6e12daece8dc0e44662b9',
-    messagingSenderId: '98531808956',
-    projectId: 'healthband-910f9',
-    storageBucket: 'healthband-910f9.appspot.com',
+    apiKey: 'AIzaSyBx8uvwlt1vB1WgYCL2AmzkAf0DvchjwQg',
+    appId: '1:150511519613:ios:ee65212723a09234f52e14',
+    messagingSenderId: '150511519613',
+    projectId: 'hband-3a540',
+    storageBucket: 'hband-3a540.appspot.com',
     iosBundleId: 'com.example.healthBand',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAjqedA-LS-WhCI1LNpfahGI7cuTgRtWrI',
-    appId: '1:98531808956:ios:2f533077f5fdd9714662b9',
-    messagingSenderId: '98531808956',
-    projectId: 'healthband-910f9',
-    storageBucket: 'healthband-910f9.appspot.com',
+    apiKey: 'AIzaSyBx8uvwlt1vB1WgYCL2AmzkAf0DvchjwQg',
+    appId: '1:150511519613:ios:2455fbc5fa39b2f4f52e14',
+    messagingSenderId: '150511519613',
+    projectId: 'hband-3a540',
+    storageBucket: 'hband-3a540.appspot.com',
     iosBundleId: 'com.example.healthBand.RunnerTests',
   );
 }

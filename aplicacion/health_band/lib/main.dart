@@ -22,7 +22,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:health_band/utils.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-
+import 'firebase_options.dart';
 /*void main() {
   WidgetsFlutterBinding.ensureInitialized();
 OneSignal.initialize("<cc6a0abf-eee1-4a36-962b-573eb95a0066>");

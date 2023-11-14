@@ -32,7 +32,7 @@ def conexion():
         #se muestra en la pantalla un mensaje el cual dice "Estableciendo conexion con la red"
         sta_if.active(True)
         #Se declara que la variable STA_IF se pueda conectar a redes wifi
-        sta_if.connect('Fibertel WiFi047 2.4GHz', '0142147406')
+        sta_if.connect('iPhone de Gonzalo', 'gonzalo12345')
         #aqui se declara primero la red a conectarse y luego la contraseña 
         while not sta_if.isconnected():
             # si no se establece ninguna conexion, dejarla pasar. 
@@ -61,7 +61,7 @@ def test3 ():
 
 def categorizar_pulsaciones(pulsaciones):
     #se declara la funcion categorizar_pulsaciones con el objetivo de brindar un mensaje dependiendo lo medido
-    if 60 <= pulsaciones <= 85:
+    if 60 <= pulsaciones <= 80:
         #Si es mayor o igual a 60 o menor o igual a 80, son pulsaciones normales
         return "Pulsaciones normales"
     elif 85 <= pulsaciones <= 90:
@@ -103,7 +103,7 @@ def categorizar_mov(estado):
     elif estado == 3:
         return "se produjo una caida"
     elif estado == 4:
-        return "Actividad Normal"
+        return "No ocurrio ninguna anormalidad"
 
 def mediciones():
     #Se declara la funcion mediciones 
@@ -145,21 +145,15 @@ def web():
     tempe = temperatura.datos4
     
     move = fisico.datos5
-    # if Sensor.datos > 60 and Sensor.datos < 130 and Sensor.datos2 > 40 and Sensor.datos2 < 100 and temperatura.datos4 > 33 and temperatura.datos4 < 42 and fisico.datos5 > 0 and fisico.datos5 < 5:
     
     #Se vuelve a llamar a la variable Spo2 la cual contiene lo medido en Spo2
-    
-    #Se le dice a la funcion que SI Bpm esta ente 40 y 110 Y  que SI Spo2 esta entre 50 y 110, entonces ejecute lo siguiente
-    info = { 'PULSOS' : pulsaciones , 'OXIGENO' : Spo2 , 'TEMPERATURA' : tempe , 'MOVIMIENTO' : move }
+    if Sensor.datos > 40  and Sensor.datos < 130 and Sensor.datos2 > 40 and Sensor.datos2 < 100 and temperatura.datos4 > 33 and temperatura.datos4 < 42 and fisico.datos5 > 0 and fisico.datos5 < 5:
+        #Se le dice a la funcion que SI Bpm esta ente 40 y 110 Y  que SI    Spo2 esta entre 50 y 110, entonces ejecute lo siguiente
+        info = { 'PULSOS' : pulsaciones , 'OXIGENO' : Spo2 , 'TEMPERATURA' : tempe , 'MOVIMIENTO' : move }
         #Se declara la variable info que contiene Pulsaciones y Spo2
-    requests.post('http://192.168.0.186:8080/datos/', json=info)
-    
-    
-    #g = requests.post('http://192.168.0.186:8080/datos/', json=info)
-    
-    #print (g.text)
-    
+        g = requests.post('http://192.168.124.177:8080/datos/', json=info)
         #Se hace un request.post, el cual envia lo sensado a la pagina web en forma de json, el cual este llama a la variable info
+        print (g.text)
         #Se muestra en la pantalla lo enviado a la pagina web
     time.sleep (2)
     #El codigo espera 2 segundos para volver a ejecutar el if
@@ -169,5 +163,6 @@ while True:
     time.sleep (2)
     #El codigo espera 2 segundos para volver a ejecutar web 
         
+
 
 

@@ -90,7 +90,7 @@ class _ExFetchState extends State<ExFetch> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
+        /*appBar: AppBar(
         toolbarHeight: 80.0,
         centerTitle: true,
         flexibleSpace: Container(
@@ -102,7 +102,7 @@ class _ExFetchState extends State<ExFetch> {
           ),
           child: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/logo_hb_en_.png', width: double.infinity, height: double.infinity,),
         ),
-      ),
+      ),*/
         body:RefreshIndicator(
           onRefresh: () async{
             setState(() {
@@ -527,7 +527,7 @@ class _ExFetchState extends State<ExFetch> {
                                                 ),
           
           ),
-        bottomNavigationBar: BottomNavigationBar(
+        /*bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,
         onTap:(index) {
         setState((){
@@ -540,7 +540,7 @@ class _ExFetchState extends State<ExFetch> {
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
         BottomNavigationBarItem(icon: Icon(Icons.alarm), label: "Alarm"),
       ],
-      ),
+      ),*/
         )
     );               
   }

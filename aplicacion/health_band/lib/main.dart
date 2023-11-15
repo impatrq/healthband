@@ -90,7 +90,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 51, 49, 97)),
         useMaterial3: true,
       ),
-      home: MyProfile(),
+      home: MyBottomNavBar(),
     );
   }
 }

@@ -39,10 +39,12 @@ class _MyBottomNavBarState extends State<MyBottomNavBar> {
         });
         //pageController.animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.ease);
       } ,
+      selectedItemColor: Colors.blue, // Color de elementos seleccionados
+        unselectedItemColor: Colors.grey,
       currentIndex: myCurrentIndex,  
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.alarm), label: "Alarm"),
+        BottomNavigationBarItem(icon: Icon(Icons.alarm), label: "Alarm",),
       ],
       ),
       body:IndexedStack(children: pages,),

@@ -18,6 +18,7 @@ import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'profile.dart';
 import 'package:url_launcher/url_launcher.dart';
+//import 'package:supabase/supabase.dart';
 //import 'package:health_band/pdfs/pdf_class.dart';
 //import 'package:health_band/pdfs/pdf_class.dart';
 
@@ -139,31 +140,31 @@ class _ExFetchState extends State<ExFetch> {
                                 Color textColor2;
                                 
                                 if (data2.value < 40 || data2.value > 140) {
-                                  textColor2 = Colors.red;
+                                  textColor2 = const Color.fromARGB(255, 169, 26, 15);
                                 } else if (data2.value >= 120 && data2.value <= 130) {
-                                  textColor2 = Colors.yellow;
+                                  textColor2 = const Color.fromARGB(255, 225, 167, 31);
                                 } else if (data2.value >= 50 && data2.value <= 60) {
-                                  textColor2 = Colors.orange;
+                                  textColor2 = const Color.fromARGB(255, 228, 107, 15);
                                 } else {
-                                  textColor2 = Colors.green;
+                                  textColor2 = const Color.fromARGB(255, 45, 123, 47);
                                 }
                                 Color textColor3;
                                 if(data3.value < 95 || data3.value > 100 ){
-                                  textColor3 = Colors.red;
+                                  textColor3 = const Color.fromARGB(255, 169, 26, 15);
                                 }
                                 else{
-                                  textColor3 = Colors.green;
+                                  textColor3 = const Color.fromARGB(255, 45, 123, 47);
                                 }
 
                                 Color textColor4;
                                 if ((data4.value < 35 && data4.value > 34)|| (data4.value > 37.5 && data4.value < 38.5)){
-                                  textColor4 = Colors.orange;
+                                  textColor4 = const Color.fromARGB(255, 228, 107, 15);
                                 }
                                 else if(data4.value < 34 || data4.value > 38.5){
-                                  textColor4 = Colors.red;
+                                  textColor4 = const Color.fromARGB(255, 169, 26, 15);
                                 }
                                 else{
-                                  textColor4 = Colors.green;
+                                  textColor4 = const Color.fromARGB(255, 45, 123, 47);
                                 }
                                 
 

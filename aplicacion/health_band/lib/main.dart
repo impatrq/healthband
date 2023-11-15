@@ -23,6 +23,7 @@ import 'package:health_band/utils.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'firebase_options.dart';
+//import 'package:supabase_quickstart'
 /*void main() {
   WidgetsFlutterBinding.ensureInitialized();
 OneSignal.initialize("<cc6a0abf-eee1-4a36-962b-573eb95a0066>");
@@ -89,7 +90,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 51, 49, 97)),
         useMaterial3: true,
       ),
-      home: MyBottomNavBar(),
+      home: MyProfile(),
     );
   }
 }

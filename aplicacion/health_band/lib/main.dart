@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_band/bottomnavbar.dart';
+import 'package:health_band/historial.dart';
 import 'package:health_band/src/providers/provider.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:health_band/example_fetching.dart';
@@ -90,7 +91,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 51, 49, 97)),
         useMaterial3: true,
       ),
-      home: MyBottomNavBar(),
+      home: Historial(),
     );
   }
 }

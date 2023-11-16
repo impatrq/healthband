@@ -31,7 +31,17 @@ class _MyBottomNavBarState extends State<MyBottomNavBar> {
           child: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/logo_hb_en_.png', width: double.infinity, height: double.infinity,),
         ),
       ),
+      body: PageView(
+        controller: PageController(),
+        children: pages,
+        onPageChanged: (index) {
+          setState(() {
+            myCurrentIndex = index;
+          });
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
+        //currentIndex: myCurrentIndex
         type: BottomNavigationBarType.shifting,
         onTap:(index) {
         setState((){
@@ -47,7 +57,7 @@ class _MyBottomNavBarState extends State<MyBottomNavBar> {
         BottomNavigationBarItem(icon: Icon(Icons.alarm), label: "Alarm",),
       ],
       ),
-      body:IndexedStack(children: pages,),
+      //body:IndexedStack(children: pages,),
     );
   }
   }

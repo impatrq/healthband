@@ -18,6 +18,7 @@ import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'profile.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'pdf_historial.dart';
 //import 'package:supabase/supabase.dart';
 //import 'package:health_band/pdfs/pdf_class.dart';
 //import 'package:health_band/pdfs/pdf_class.dart';
@@ -44,6 +45,7 @@ class _ExFetchState extends State<ExFetch> {
   //final number = '+5491126913745';
   final Uri phone_number = Uri.parse('tel: +54-9-11-2691-3745');
   get stream => supabaseClient.from('healthdatos_datos').stream(primaryKey: ['id']).order('time', ascending: false).limit(1);
+  
   //late RealtimeSubscription subscription;
 
   Future<List<dynamic>> fetchData() async {
@@ -55,6 +57,18 @@ class _ExFetchState extends State<ExFetch> {
       .limit(1);
       // Parse JSON data
       return response ;
+  }
+
+  Future<List<dynamic>> fetchHistorialData() async {
+    // Fetch data from Supabase table
+    final response = await supabaseClient
+      .from('healthdatos_datos')
+      .select('id, pulsos, oxigenacion, time, movimiento, temperatura')
+      .order('time', ascending: false)
+      .limit(10);
+      print (response);
+      // Parse JSON data
+      return response;
   }
 
   /*Future<void> _refreshData() async {
@@ -167,7 +181,10 @@ class _ExFetchState extends State<ExFetch> {
                                   textColor4 = const Color.fromARGB(255, 45, 123, 47);
                                 }
                                 
-
+                                if (data2.value < 40 && data5.value != 'No ha ocurrido nada'){
+                                  launchDialer(phone_number as String);
+                                  print('Llamando a Emergencias');
+                                }
 
                                 return SingleChildScrollView(
                                   child: RefreshIndicator(
@@ -327,7 +344,104 @@ class _ExFetchState extends State<ExFetch> {
                                                                 ),
                                                               ],
                                                             ),
-                                                            
+                                                            //const SizedBox(height: 3,),
+                                                             Container(
+                                                              decoration: const BoxDecoration(color: Color.fromARGB(255, 248, 248, 248)),
+                                                              padding: const EdgeInsets.fromLTRB(0, 0, 38, 0),
+                                                               child: const Row(
+                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                 children: [
+                                                                  PDFHistorial()
+                                                                 ]/*[FutureBuilder(
+                                                                  future:fetchHistorialData(),
+                                                                  builder:(context, snapshot) {
+                                                                    if (snapshot.connectionState == ConnectionState.waiting) {
+                                                                      return CircularProgressIndicator(); // O algún indicador de carga
+                                                                    }
+                                                                    else if (snapshot.hasError){
+                                                                      return Center(child: Text("${snapshot.error}"));
+                                                                    }
+                                                                    else if(snapshot.data!.isEmpty){
+                                                                      return const Center(child: Text('null'));
+                                                                    }
+                                                                    else{
+                                                                      final List<dynamic> listaDatos = snapshot.data as List<dynamic>;
+                                                                      final data = listaDatos[0];
+                                                                      MapEntry data2 = data.entries.firstWhere((entry) => entry.key == "pulsos");
+                                                                      MapEntry data3 = data.entries.firstWhere((entry) => entry.key == "oxigenacion");
+                                                                      MapEntry data4 = data.entries.firstWhere((entry) => entry.key == "temperatura");
+                                                                      MapEntry data5 = data.entries.firstWhere((entry) => entry.key == "movimiento");
+                                                                      return Row(
+                                                                        children:[
+                                                                          MaterialButton(child: const Text('Descargar Historial', style: TextStyle(fontSize: 7),),
+                                                                            onPressed: ()async{
+                                                                          Future _createPDF () async{
+                                                                            final document = pdf_wdgts.Document();
+                                                                                document.addPage( pdf_wdgts.Page(
+                                                                                  build: (context) {
+                                                                                    return pdf_wdgts.Table(
+                                                                                      
+                                                                                      children: [
+                                                                                        pdf_wdgts.TableRow(
+                                                                                          children: [
+                                                                                             pdf_wdgts.Column(children: [
+                                                                                                  pdf_wdgts.Text("Hora", style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                                  pdf_wdgts.Text("Fecha", style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                                  pdf_wdgts.Text("Ritmo Cardíaco", style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                                  pdf_wdgts.Text("Oxigenación en Sangre", style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                                  pdf_wdgts.Text("Temperatura", style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                                  pdf_wdgts.Text("Movimiento", style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                          ]),
+                                                                                        ]),
+                                                                                        pdf_wdgts.TableRow(
+                                                                                          children: [
+                                                                                             pdf_wdgts.Column(children: [
+                                                                                                  pdf_wdgts.Text("19:20", style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                                  pdf_wdgts.Text("9/12/2018", style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                                  pdf_wdgts.Text("80", style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                                  pdf_wdgts.Text("95", style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                                  pdf_wdgts.Text("37", style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                                  pdf_wdgts.Text("Actividad Normal", style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                          ]),
+                                                                                        ]),
+                                                                                        /*for (final dato in listaDatos)
+                                                                                        List<DataRow>.generate(listaDatos.length, (index) {
+                                                                                          final DateTime tiempo = DateTime.parse(listaDatos[index]['time']);
+                                                                                          return DataRow(cells: [
+                                                                                            DataCell(Text(formatoFechaHora(tiempo)),),
+                                                                                            DataCell(Text(formatoFechaCompleta(tiempo))),
+                                                                                            DataCell(Text('${data2.value} BPM')),
+                                                                                            DataCell(Text('${data3.value} %')),
+                                                                                            DataCell(Text('${data4.value} C')),
+                                                                                            DataCell(Text('${data5.value}')),
+                                                                                          ]);
+                                                                                        })*/
+                                                                                          /*pdf_wdgts.TableRow(children: [
+                                                                                                  pdf_wdgts.Text(formatoFechaHora(tiempo), style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                                  pdf_wdgts.Text(formatoFechaCompleta(tiempo), style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                                  pdf_wdgts.Text(data2.value.toString(), style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                                  pdf_wdgts.Text(data3.value.toString(), style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                                  pdf_wdgts.Text(data4.value.toString(), style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                                  pdf_wdgts.Text(data5.value.toString(), style:const pdf_wdgts.TextStyle(fontSize: 22)),
+                                                                                          ])*/
+                                                                                        
+                                                                                      ]
+                                                                                      );
+                                                                                  
+                                                                                      
+                                                                                    
+                                                                                }
+                                                                                )
+                                                                                );
+                                                                          }           
+                                                                        }),
+                                                                        ] 
+                                                                      );
+                                                                    }
+                                                                  },
+                                                                 ),*/
+                                                               ),
+                                                             ),
                                                             Row(
                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                               children:[ Column(
@@ -455,7 +569,7 @@ class _ExFetchState extends State<ExFetch> {
                                                                                 print('Emergencias');
                                                                                 print(await canLaunchUrl(phone_number));
                                                                                 //await FlutterPhoneDirectCaller.callNumber(number);
-                                                                               //launchDialer(number);
+                                                                               launchDialer(phone_number as String);
                                                                                 //FlutterPhoneDirectCaller.callNumber('+5491126913745');
                                                                               },
                                                                               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
@@ -590,4 +704,33 @@ void _launchPhone(String phoneNumber) async {
     }
   }
 
+  String formatoHora(DateTime dateTime) {
+    return DateFormat('HH').format(dateTime);
+  }
+
+  String formatoMinutos(DateTime dateTime) {
+    return DateFormat('mm').format(dateTime);
+  }
+
+  String formatoFechaHora(DateTime dateTime) {
+  return DateFormat('HH:mm').format(dateTime);
+}
+
+  String formatoDia(DateTime dateTime) {
+    return DateFormat('dd').format(dateTime);
+  }
+
+  String formatoFechaCompleta(DateTime dateTime) {
+  return DateFormat('dd/MM/yyyy').format(dateTime);
+}
+
+  String formatoMes(DateTime dateTime) {
+    return DateFormat('MM').format(dateTime);
+  }
+
+  String formatoAnio(DateTime dateTime) {
+    return DateFormat('yyyy').format(dateTime);
+  }
+  
+  toList() {}
 }

@@ -18,7 +18,7 @@ Buscamos diseñar un sistema capaz de monitorear los signos vitales de una perso
 ![Escudo](logo.png)
 
 
-(foto grupal)
+![foto grupal](assets/fotogrupal.jpg)
 Pagano, Tobias: 
 Instagram: @tobiass.p
 

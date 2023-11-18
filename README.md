@@ -1,9 +1,4 @@
-# HealthBand Aid
-### *Keep Healthy, Save Lives.*
-
 ![HealthBand](https://github.com/impatrq/healthband/blob/main/assets/logo%20completo.png)
-
-![HealthBand Aid](image0.jpeg)
 
 ## ¿Qué es HealthBand?
 

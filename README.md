@@ -7,7 +7,7 @@
 ![pulsera](https://github.com/impatrq/healthband/blob/main/assets/health_band.jpg)
 
 
-La incorporación de un Bot de Telegram 💬: permitirá recibir alertas, consultar el estado de salud e información general.
+La incorporación de un Bot de Telegram 💬 permitirá recibir alertas, consultar el estado de salud e información general.
 
 
 ![HealthBot](https://github.com/impatrq/healthband/blob/main/assets/bot%20de%20telegram.mp4)
@@ -33,34 +33,44 @@ Buscamos diseñar un sistema capaz de monitorear los signos vitales de una perso
 
 ![foto grupal](assets/fotogrupal.jpg)
 
-Pagano, Tobias: 
-Instagram: @tobiass.p
 
-Mail: paganotobias05@gmail.com
+# Integrantes
 
 
+* Acuña, Alvaro:
+[<img src="https://github.com/tobiasp25/tobiasp25/blob/main/81AAE124-0B8F-4C13-B814-09BCAB1E2FAA.PNG" width=25>](https://www.linkedin.com/in/álvaro-daniel-acuña-788ab9264/)
 
-Gomez, Gonzalo:
-Instagram: @gomez.gonza01
-
-Mail: gonzalogomez9673@gmail.com
+Mail: alvarodaniel977@gmail.com
 
 
 
-Giulianetti Bruno
-Instagram: @br1egm
+* Giulianetti Bruno
+[<img src="https://github.com/tobiasp25/tobiasp25/blob/main/C30477D6-336B-46B0-B594-780BA953D7ED.PNG" width=25 color='#fcb6da'>](https://www.instagram.com/br1egm/) 
+[<img src="https://github.com/tobiasp25/tobiasp25/blob/main/81AAE124-0B8F-4C13-B814-09BCAB1E2FAA.PNG" width=25>](https://www.linkedin.com/in/bruno-giulianetti-527489281/)
 
 Mail: zazitag@gmail.com
 
 
 
-Acuña, Alvaro:
-Mail: alvarodaniel977@gmail.com
+* Gomez, Gonzalo:
+[<img src="https://github.com/tobiasp25/tobiasp25/blob/main/C30477D6-336B-46B0-B594-780BA953D7ED.PNG" width=25 color='#fcb6da'>](https://www.instagram.com/gomez.gonza01/) 
+[<img src="https://github.com/tobiasp25/tobiasp25/blob/main/81AAE124-0B8F-4C13-B814-09BCAB1E2FAA.PNG" width=25>](https://www.linkedin.com/in/gonzalo-martin-gomez-5134b2280/)
+
+Mail: gonzalogomez9673@gmail.com
 
 
 
-Perlo, Mateo:
-Instagram: @mateo.perlo32
+* Pagano, Tobias: 
+[<img src="https://github.com/tobiasp25/tobiasp25/blob/main/C30477D6-336B-46B0-B594-780BA953D7ED.PNG" width=25 color='#fcb6da'>](https://www.instagram.com/tobiass.p/) 
+[<img src="https://github.com/tobiasp25/tobiasp25/blob/main/81AAE124-0B8F-4C13-B814-09BCAB1E2FAA.PNG" width=25>](https://www.linkedin.com/in/tob%C3%ADas-pagano-05b810268/)
+
+Mail: paganotobias05@gmail.com
+
+
+
+* Perlo, Mateo:
+[<img src="https://github.com/tobiasp25/tobiasp25/blob/main/C30477D6-336B-46B0-B594-780BA953D7ED.PNG" width=25 color='#fcb6da'>](https://www.instagram.com/mateo.perlo32/) 
+[<img src="https://github.com/tobiasp25/tobiasp25/blob/main/81AAE124-0B8F-4C13-B814-09BCAB1E2FAA.PNG" width=25>](https://www.linkedin.com/in/mateo-perlo-324630273/)
 
 Mail: mateoperlo22@gmail.com
 
@@ -68,3 +78,14 @@ Mail: mateoperlo22@gmail.com
 Seguinos en nuestro perfil oficial de Instagram : [@healthband.aid](https://www.instagram.com/healthband.aid/)
 
 Consultanos vía mail a 📧: (mailto:healthband.aid@gmail.com) 
+
+
+# Distinciones
+
+HealthBand ha participado de las Olimpíadas Nacionales de Informática, Electrónica y Telecomunicaciones **ONIET**, organizadas por la ***Universidad Blas Pascal*** en Córdoba. En su participación ha sido premiado con el ***Primer Puesto*** 🥇 en la competencia **Prototipos II** 🤖 y con un ***Tercer Puesto*** 🥉 en la competencia **FirstPlan** 🕴️
+
+
+![Premiación](https://github.com/impatrq/healthband/blob/main/assets/premiacion%20oniet.JPG)
+
+![Certificado Prototipos II](https://github.com/impatrq/healthband/blob/main/assets/certificado%20oniet.pdf)
+![Certificado FirstPlan](https://github.com/impatrq/healthband/blob/main/assets/certificado%20firstplan.pdf)

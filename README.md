@@ -7,7 +7,7 @@
 ![pulsera](https://github.com/impatrq/healthband/blob/main/assets/health_band.jpg)
 
 
-La incorporación de un bot de telegram permitirá recibir alertas, consultar el estado de salud e información general.
+La incorporación de un Bot de Telegram 💬: permitirá recibir alertas, consultar el estado de salud e información general.
 
 
 ![HealthBot](https://github.com/impatrq/healthband/blob/main/assets/bot%20de%20telegram.mp4)
@@ -21,13 +21,18 @@ Su funcionamiento se complementará al de una aplicación móvil :iphone:, la cu
 
 Buscamos diseñar un sistema capaz de monitorear los signos vitales de una persona de forma inteligente y de fácil interpretación para sus usuarios,  siendo capaz de activar un protocolo de emergencias cuando se presente una complicacion de salud y salvar vidas. 
 
+![app](https://github.com/impatrq/healthband/blob/main/assets/app_image.png)
+
 ## ¿Quienes somos?
 
 ### Somos un grupo de Estudiantes del séptimo año de la **Escuela Técnica N°7- IMPA**, de la especialidad **Aviónica**.
+
+
 ![Escudo](logo.png)
 
 
 ![foto grupal](assets/fotogrupal.jpg)
+
 Pagano, Tobias: 
 Instagram: @tobiass.p
 

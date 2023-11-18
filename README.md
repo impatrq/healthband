@@ -5,7 +5,14 @@
 
 ## ¿Qué es HealthBand?
 
-**HealthBand** propone un sistema de monitoreo de salud continuo e inteligente :thermometer:. Utilizará un dispositivo *wearable* que censará diferentes parámetros de salud, como frecuencia cardíaca, oxigenación sanguínea, presión arterial, movimiento y azúcar en sangre:heart:. El dispositivo será programado para detectar niveles de salud anormales y emitir alertas en formas de vibraciones, sonidos e iluminación. Su funcionamiento se complementará al funcionamiento de una aplicación móvil :iphone:, la cuál emitirá notificaciones interactivas con el paciente, pudiendo conocer el estado y la conciencia del mismo, además de brindar una interfaz simple que permita al usuario disponer de su estado de salud en cualquier momento, así como tener acceso a registros previos.
+**HealthBand** propone un sistema de monitoreo de salud continuo e inteligente :thermometer:. Utilizará un dispositivo *wearable* que censará diferentes parámetros de salud, como frecuencia cardíaca, oxigenación sanguínea, temperatura corporal y movimiento :heart:. El dispositivo será programado para detectar niveles de salud anormales y emitir alertas en formas de vibraciones. La incorporación de un bot de telegram permitirá recibir alertas, consultar el estado de salud e información general.
+
+
+![HealthBot](https://github.com/impatrq/healthband/blob/main/assets/bot%20de%20telegram.mp4)
+
+
+Su funcionamiento se complementará al de una aplicación móvil :iphone:, la cuál le permitirá al usuario disponer de su estado de salud en cualquier momento, así como tener acceso a registros previos, descargarlos y compartirlos.
+
 
 
 ## Objetivos
@@ -51,6 +58,6 @@ Instagram: @mateo.perlo32
 Mail: mateoperlo22@gmail.com
 
 
-Seguinos en nuestro perfil oficial de Instagram : [@healthBand.aid](https://www.instagram.com/healthband.aid/)
+Seguinos en nuestro perfil oficial de Instagram : [@healthband.aid](https://www.instagram.com/healthband.aid/)
 
-Consultanos vía mail a [healthband.aid@gmail.com] (mailto:healthband.aid@gmail.com) 
+Consultanos vía mail a 📧: (mailto:healthband.aid@gmail.com) 

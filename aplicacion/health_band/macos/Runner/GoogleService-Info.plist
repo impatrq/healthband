@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAjqedA-LS-WhCI1LNpfahGI7cuTgRtWrI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>98531808956</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.healthBand.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>healthband-910f9</string>
+	<key>STORAGE_BUCKET</key>
+	<string>healthband-910f9.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:98531808956:ios:2f533077f5fdd9714662b9</string>
+</dict>
+</plist>

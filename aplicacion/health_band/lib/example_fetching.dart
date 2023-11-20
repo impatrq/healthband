@@ -9,6 +9,8 @@ import 'package:flutter/services.dart';
 import 'package:supabase/supabase.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'pdf_historial.dart';
+import 'location.dart';
+import 'package:geolocator/geolocator.dart';
 void main() {
   runApp(const ExFetch());
 }
@@ -28,6 +30,25 @@ class _ExFetchState extends State<ExFetch> {
   final SupabaseClient supabaseClient = SupabaseClient('https://bhqahbhnapapcazmqnkg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJocWFoYmhuYXBhcGNhem1xbmtnIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTE0NjYsImV4cCI6MjAxMzY2NzQ2Nn0.o8plzbWgGL7cB7hRoypxtI3sXmjZq6t3hceXksV67U4');
   final Uri phone_number = Uri.parse('tel: +54-9-11-2691-3745');
   get stream => supabaseClient.from('healthdatos_datos').stream(primaryKey: ['id']).order('time', ascending: false).limit(1);
+
+  Future <Position> determinePosition() async{
+    LocationPermission permission;
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied){
+      permission = await Geolocator.requestPermission();
+      if(permission == LocationPermission.denied){
+        return Future.error('error');
+      }
+    }
+    return await Geolocator.getCurrentPosition();
+  }
+
+  void getCurrentLocation()async{
+    Position position = await determinePosition();
+    print(position.latitude);
+    print(position.longitude);
+  }
+
   Future<List<dynamic>> fetchData() async {
     final response = await supabaseClient
       .from('healthdatos_datos')
@@ -415,7 +436,8 @@ class _ExFetchState extends State<ExFetch> {
                                                                               onPressed: () async{
                                                                                 print('Emergencias');
                                                                                 print(await canLaunchUrl(phone_number));
-                                                                               launchDialer(phone_number as String);
+                                                                               //launchDialer(phone_number as String);
+                                                                               getCurrentLocation();
                                                                               },
                                                                               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                                                                               child: Row(

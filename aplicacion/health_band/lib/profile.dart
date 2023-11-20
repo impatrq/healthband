@@ -46,7 +46,7 @@ class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         toolbarHeight: 80.0,
         centerTitle: true,
         flexibleSpace: Container(
@@ -58,7 +58,7 @@ class _MyProfileState extends State<MyProfile> {
           ),
           child: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/logo_hb_en_.png', width: double.infinity, height: double.infinity,),
         ),
-      ),
+      ),*/
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Center(

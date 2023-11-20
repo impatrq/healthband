@@ -1,30 +1,14 @@
 import 'dart:io';
 import 'package:intl/intl.dart';
-//import 'dart:js';
-import 'dart:typed_data';
-import 'package:http/retry.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pdf_wdgts;
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:health_band/pdf_generators/home_pdf_generator.dart';
-//import 'dart:convert'; // for JSON decoding
-import 'package:supabase/supabase.dart'; // import Supabase library
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:syncfusion_flutter_pdf/pdf.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'profile.dart';
+import 'package:supabase/supabase.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'pdf_historial.dart';
-//import 'package:supabase/supabase.dart';
-//import 'package:health_band/pdfs/pdf_class.dart';
-//import 'package:health_band/pdfs/pdf_class.dart';
-
-
-
 void main() {
   runApp(const ExFetch());
 }
@@ -42,53 +26,28 @@ class _ExFetchState extends State<ExFetch> {
   final PageController pageController = PageController();
   final pdf = pdf_wdgts.Document();
   final SupabaseClient supabaseClient = SupabaseClient('https://bhqahbhnapapcazmqnkg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJocWFoYmhuYXBhcGNhem1xbmtnIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwOTE0NjYsImV4cCI6MjAxMzY2NzQ2Nn0.o8plzbWgGL7cB7hRoypxtI3sXmjZq6t3hceXksV67U4');
-  //final number = '+5491126913745';
   final Uri phone_number = Uri.parse('tel: +54-9-11-2691-3745');
   get stream => supabaseClient.from('healthdatos_datos').stream(primaryKey: ['id']).order('time', ascending: false).limit(1);
-  
-  //late RealtimeSubscription subscription;
-
   Future<List<dynamic>> fetchData() async {
-    // Fetch data from Supabase table
     final response = await supabaseClient
       .from('healthdatos_datos')
       .select('id, pulsos, oxigenacion, time, movimiento,temperatura')
       .order('time', ascending: false)
       .limit(1);
-      // Parse JSON data
       return response ;
   }
 
   Future<List<dynamic>> fetchHistorialData() async {
-    // Fetch data from Supabase table
     final response = await supabaseClient
       .from('healthdatos_datos')
       .select('id, pulsos, oxigenacion, time, movimiento, temperatura')
       .order('time', ascending: false)
       .limit(10);
       print (response);
-      // Parse JSON data
       return response;
   }
-
-  /*Future<void> _refreshData() async {
-    // Llamada a la función fetchData al deslizar hacia arriba
-    setState(() {});
-  }*/
-
-  /*void subscribeToRealtimeChanges() {
-    // Suscribirse a cambios en tiempo real
-    supabaseClient
-        .from('healthdatos_datos')
-        .on(SupabaseEventTypes.update, (payload) {
-      // Actualizar datos cuando se produzca un cambio en tiempo real
-      fetchData();
-    }).suscribe();
-  }*/
-
   @override
   void dispose() {
-    //subscription.unsubscribe();
     super.dispose();
     pageController.dispose();
   }
@@ -97,32 +56,17 @@ class _ExFetchState extends State<ExFetch> {
   @override
   void initState(){
     super.initState();
-    //subscribeToRealtimeChanges();
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        /*appBar: AppBar(
-        toolbarHeight: 80.0,
-        centerTitle: true,
-        flexibleSpace: Container(
-          width: 393.0,
-          padding: const EdgeInsets.fromLTRB(60.0, 50.0, 60.0, 10.0),
-          alignment: Alignment.center,
-          decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 14, 52, 96),
-          ),
-          child: Image.asset('/Users/tobiaspagano/Documents/GitHub/healthband/aplicacion/health_band/lib/assets/images/logo_hb_en_.png', width: double.infinity, height: double.infinity,),
-        ),
-      ),*/
         body:RefreshIndicator(
           onRefresh: () async{
             setState(() {
               fetchData();
             });
-            //fetchData();
           },
             child: Stack(
               children: [
@@ -132,7 +76,6 @@ class _ExFetchState extends State<ExFetch> {
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: StreamBuilder(
                             stream: supabaseClient.from('healthdatos_datos').stream(primaryKey: ['id']).order('time', ascending: false).limit(1) ,
-                            //future: fetchData(),
                             builder: (context, snapshot) {
                               if (snapshot.connectionState == ConnectionState.waiting) {
                                 return const SizedBox(
@@ -347,99 +290,12 @@ class _ExFetchState extends State<ExFetch> {
                                                             //const SizedBox(height: 3,),
                                                              Container(
                                                               decoration: const BoxDecoration(color: Color.fromARGB(255, 248, 248, 248)),
-                                                              padding: const EdgeInsets.fromLTRB(0, 0, 38, 0),
+                                                              padding: const EdgeInsets.fromLTRB(0, 0, 32, 0),
                                                                child: const Row(
                                                                 mainAxisAlignment: MainAxisAlignment.end,
                                                                  children: [
                                                                   PDFHistorial()
-                                                                 ]/*[FutureBuilder(
-                                                                  future:fetchHistorialData(),
-                                                                  builder:(context, snapshot) {
-                                                                    if (snapshot.connectionState == ConnectionState.waiting) {
-                                                                      return CircularProgressIndicator(); // O algún indicador de carga
-                                                                    }
-                                                                    else if (snapshot.hasError){
-                                                                      return Center(child: Text("${snapshot.error}"));
-                                                                    }
-                                                                    else if(snapshot.data!.isEmpty){
-                                                                      return const Center(child: Text('null'));
-                                                                    }
-                                                                    else{
-                                                                      final List<dynamic> listaDatos = snapshot.data as List<dynamic>;
-                                                                      final data = listaDatos[0];
-                                                                      MapEntry data2 = data.entries.firstWhere((entry) => entry.key == "pulsos");
-                                                                      MapEntry data3 = data.entries.firstWhere((entry) => entry.key == "oxigenacion");
-                                                                      MapEntry data4 = data.entries.firstWhere((entry) => entry.key == "temperatura");
-                                                                      MapEntry data5 = data.entries.firstWhere((entry) => entry.key == "movimiento");
-                                                                      return Row(
-                                                                        children:[
-                                                                          MaterialButton(child: const Text('Descargar Historial', style: TextStyle(fontSize: 7),),
-                                                                            onPressed: ()async{
-                                                                          Future _createPDF () async{
-                                                                            final document = pdf_wdgts.Document();
-                                                                                document.addPage( pdf_wdgts.Page(
-                                                                                  build: (context) {
-                                                                                    return pdf_wdgts.Table(
-                                                                                      
-                                                                                      children: [
-                                                                                        pdf_wdgts.TableRow(
-                                                                                          children: [
-                                                                                             pdf_wdgts.Column(children: [
-                                                                                                  pdf_wdgts.Text("Hora", style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                                  pdf_wdgts.Text("Fecha", style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                                  pdf_wdgts.Text("Ritmo Cardíaco", style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                                  pdf_wdgts.Text("Oxigenación en Sangre", style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                                  pdf_wdgts.Text("Temperatura", style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                                  pdf_wdgts.Text("Movimiento", style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                          ]),
-                                                                                        ]),
-                                                                                        pdf_wdgts.TableRow(
-                                                                                          children: [
-                                                                                             pdf_wdgts.Column(children: [
-                                                                                                  pdf_wdgts.Text("19:20", style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                                  pdf_wdgts.Text("9/12/2018", style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                                  pdf_wdgts.Text("80", style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                                  pdf_wdgts.Text("95", style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                                  pdf_wdgts.Text("37", style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                                  pdf_wdgts.Text("Actividad Normal", style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                          ]),
-                                                                                        ]),
-                                                                                        /*for (final dato in listaDatos)
-                                                                                        List<DataRow>.generate(listaDatos.length, (index) {
-                                                                                          final DateTime tiempo = DateTime.parse(listaDatos[index]['time']);
-                                                                                          return DataRow(cells: [
-                                                                                            DataCell(Text(formatoFechaHora(tiempo)),),
-                                                                                            DataCell(Text(formatoFechaCompleta(tiempo))),
-                                                                                            DataCell(Text('${data2.value} BPM')),
-                                                                                            DataCell(Text('${data3.value} %')),
-                                                                                            DataCell(Text('${data4.value} C')),
-                                                                                            DataCell(Text('${data5.value}')),
-                                                                                          ]);
-                                                                                        })*/
-                                                                                          /*pdf_wdgts.TableRow(children: [
-                                                                                                  pdf_wdgts.Text(formatoFechaHora(tiempo), style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                                  pdf_wdgts.Text(formatoFechaCompleta(tiempo), style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                                  pdf_wdgts.Text(data2.value.toString(), style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                                  pdf_wdgts.Text(data3.value.toString(), style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                                  pdf_wdgts.Text(data4.value.toString(), style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                                  pdf_wdgts.Text(data5.value.toString(), style:const pdf_wdgts.TextStyle(fontSize: 22)),
-                                                                                          ])*/
-                                                                                        
-                                                                                      ]
-                                                                                      );
-                                                                                  
-                                                                                      
-                                                                                    
-                                                                                }
-                                                                                )
-                                                                                );
-                                                                          }           
-                                                                        }),
-                                                                        ] 
-                                                                      );
-                                                                    }
-                                                                  },
-                                                                 ),*/
+                                                                 ]
                                                                ),
                                                              ),
                                                             Row(
@@ -450,24 +306,21 @@ class _ExFetchState extends State<ExFetch> {
                                                                   Center(
                                                                     child: Container(constraints: const BoxConstraints(maxWidth: 393),
                                                                       width: double.infinity,
-                                                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
+                                                                      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
                                                                         child: Column(
                                                                           crossAxisAlignment: CrossAxisAlignment.center,
                                                                           children: [
                                                                           Row(
                                                                             mainAxisAlignment: MainAxisAlignment.center,
                                                                             children: <Widget>[
-                                                                              Container(width: 160, height: 90, padding:const EdgeInsets.fromLTRB(8, 4, 8, 3),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)), 
+                                                                              Container(width: 158, height: 90, padding:const EdgeInsets.fromLTRB(8, 4, 8, 3),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)), 
                                                                               child: Column(
-                                                                                //crossAxisAlignment: CrossAxisAlignment.start,
                                                                                 children:[ 
                                                                                   const SizedBox(height: 10,),
                                                                                   const Row(
                                                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                                                   children: [
-                                                                                    //Image.asset('assets/images/pulse-bg.png', width: 5,height: 5,),
                                                                                     Text('Ritmo Cardíaco', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12, color: Color.fromARGB(255, 14, 52, 96)),),
-                                                                                    //IconButton(onPressed: () => {}, icon:const Icon(Icons.arrow_forward_ios, size:5,) )
                                                                                   ],
                                                                                 ),
                                                                                   const SizedBox(height: 7,),
@@ -475,8 +328,8 @@ class _ExFetchState extends State<ExFetch> {
                                                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                                                   children: [
                                                                                     Text('${data2.value} BPM', style: TextStyle(fontWeight: FontWeight.w400, color:textColor2),)])])),
-                                                                                    const SizedBox(width: 18,),
-                                                                              Container(width: 160,height: 90, padding:const EdgeInsets.fromLTRB(8, 7, 4, 3),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)),
+                                                                                    const SizedBox(width: 15,),
+                                                                              Container(width: 158,height: 90, padding:const EdgeInsets.fromLTRB(8, 7, 4, 3),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)),
                                                                               child: Column(
                                                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                                                 children:[ 
@@ -484,9 +337,7 @@ class _ExFetchState extends State<ExFetch> {
                                                                                 const Row(
                                                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                                                   children:[
-                                                                                  //Image.asset('assets/images/aire pattern.png', width: 7,height: 7,),
                                                                                   Text('Oxigenación en Sangre',style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11, color: Color.fromARGB(255, 14, 52, 96)),),
-                                                                                  //IconButton(onPressed: () => {}, icon:const Icon(Icons.arrow_forward_ios, size:7,) )
                                                                                 ]
                                                                                   
                                                                                 ),
@@ -501,16 +352,14 @@ class _ExFetchState extends State<ExFetch> {
                                                                           Row(
                                                                             mainAxisAlignment: MainAxisAlignment.center,
                                                                             children: [
-                                                                            Container(width:160,height:90 ,padding:const EdgeInsets.fromLTRB(8, 7, 4, 3),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)),
+                                                                            Container(width:158,height:90 ,padding:const EdgeInsets.fromLTRB(8, 7, 4, 3),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)),
                                                                             child: Column(
                                                                               children:[ 
                                                                                 const SizedBox(height: 10,),
                                                                               const Row(
                                                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                                                 children: [
-                                                                                  //Image.asset('assets/images/termometro pattern.png', width: 7, height: 7,),
                                                                                   Text('Temperatura Corporal', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 11, color: Color.fromARGB(255, 14, 52, 96)),),
-                                                                                  //IconButton(onPressed: () => {}, icon:const Icon(Icons.arrow_forward_ios, size:5,) )
                                                                                 ],
                                                                               ),
                                                                                   
@@ -525,17 +374,15 @@ class _ExFetchState extends State<ExFetch> {
                                                                                 )
                                                                               ),
                                                                             
-                                                                            const SizedBox(width: 18,),
+                                                                            const SizedBox(width: 15,),
                                                                                   
-                                                                            Container(width: 160, height:90, padding:const EdgeInsets.fromLTRB(8, 7, 4, 3),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)),
+                                                                            Container(width: 158, height:90, padding:const EdgeInsets.fromLTRB(8, 7, 4, 3),decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(7)),
                                                                             child: Column(children:[ 
                                                                               const SizedBox(height: 10,),
                                                                               const Row(
                                                                                 mainAxisAlignment: MainAxisAlignment.start ,
                                                                                 children: [
-                                                                                  //Image.asset('assets/images/actividad pattern.png', width: 5, height: 5,),
                                                                                   Text('Actividad', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12, color: Color.fromARGB(255, 14, 52, 96)),),
-                                                                                  //IconButton(onPressed: () => {}, icon:const Icon(Icons.arrow_forward_ios, size:9,) )
                                                                                 ],
                                                                               ),
                                                                                   
@@ -568,9 +415,7 @@ class _ExFetchState extends State<ExFetch> {
                                                                               onPressed: () async{
                                                                                 print('Emergencias');
                                                                                 print(await canLaunchUrl(phone_number));
-                                                                                //await FlutterPhoneDirectCaller.callNumber(number);
                                                                                launchDialer(phone_number as String);
-                                                                                //FlutterPhoneDirectCaller.callNumber('+5491126913745');
                                                                               },
                                                                               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                                                                               child: Row(
@@ -589,16 +434,6 @@ class _ExFetchState extends State<ExFetch> {
                                                                                       mainAxisAlignment: MainAxisAlignment.center,
                                                                                       mainAxisSize: MainAxisSize.min,
                                                                                       children: <Widget>[
-                                                                                        /*Container(
-                                                                                          width: 0,
-                                                                                          height: 20,
-                                                                                          decoration: const BoxDecoration(
-                                                                                            //image : DecorationImage(
-                                                                                            //image: AssetImage('assets/images/Info.png'),
-                                                                                            //fit: BoxFit.fitWidth
-                                                                                          // ),
-                                                                                          )
-                                                                                        ),*/
                                                                                         Center(
                                                                                           child: Text('Emergencias', textAlign: TextAlign.center, style: TextStyle(
                                                                                           color: Color.fromRGBO(186, 186, 186, 1),
@@ -641,20 +476,6 @@ class _ExFetchState extends State<ExFetch> {
                                                 ),
           
           ),
-        /*bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
-        onTap:(index) {
-        setState((){
-          myIndex = index;
-        });
-        //pageController.animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.ease);
-      } ,
-      currentIndex: myIndex,  
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.alarm), label: "Alarm"),
-      ],
-      ),*/
         )
     );               
   }

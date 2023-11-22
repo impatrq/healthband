@@ -19,14 +19,14 @@ ALLOWED_HOSTS = ['.vercel.app', 'healthband.vercel.app', '192.168.111.83', 'heal
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'healthdatos',
-    'rest_framework'
+    'healthdatos'
 ]
 
 MIDDLEWARE = [

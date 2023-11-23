@@ -2,7 +2,7 @@
 
 ## ¿Qué es HealthBand? 💗
 
-**HealthBand** propone un sistema de monitoreo de salud continuo e inteligente :thermometer:. Utilizará un dispositivo *wearable* que censará diferentes parámetros de salud, como frecuencia cardíaca, oxigenación sanguínea, temperatura corporal y movimiento :heart:. El dispositivo será programado para detectar niveles de salud anormales y emitir alertas en formas de vibraciones.
+**HealthBand** propone un sistema de monitoreo de salud constante e inteligente :thermometer:. Utilizará un dispositivo *wearable* que censará diferentes parámetros de salud, como frecuencia cardíaca, oxigenación sanguínea, temperatura corporal y movimiento :heart:. El dispositivo será programado para detectar niveles de salud anormales y emitir alertas en formas de vibraciones.
 
 ![pulsera](https://github.com/impatrq/healthband/blob/main/assets/health_band.jpg)
 

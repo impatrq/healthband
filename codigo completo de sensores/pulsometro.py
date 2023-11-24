@@ -72,7 +72,7 @@ class Pulso():
                 valueir = ir_reading
                 valuered = red_reading
                 
-                Spo2 = valueir * 0.005800 # factor de conversion aproximado calculado para el Spo2
+                Spo2 = valueir * 0.00625 # factor de conversion aproximado calculado para el Spo2
                 self.datos2 = Spo2
                 
                 history.append(valuered)
@@ -85,8 +85,8 @@ class Pulso():
 
                 minima, maxima = min(history), max(history)
 
-                threshold_on = (minima + maxima * 3) // 4    # (a+b*2)/3 dedo --------- (a+b*1.5)/2.5
-                threshold_off = (( 1 * minima + maxima) // 2)       # (a+b)/2 dedo------ (a+b)/2
+                threshold_on = (minima + maxima * 2) / 3    # (a+b*2)/3 dedo --------- (a+b*1.5)/2.5
+                threshold_off = (( 1 * minima + maxima) / 2)       # (a+b)/2 dedo------ (a+b)/2
                 if valuered > 4000:
                     if not beat and valuered > threshold_on:
                         beat = True                    
@@ -114,4 +114,5 @@ class Pulso():
                     beats = round(sum(beats_history)/len(beats_history) )
                     self.datos = beats
                     time.sleep(1)
+              
               

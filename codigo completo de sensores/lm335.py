@@ -3,6 +3,7 @@ from time import sleep
 
 lm335 = Pin(19, Pin.OUT)
 motor_dc = Pin(5, Pin.OUT)
+temp_list = []
 
 adc_pin = ADC(Pin(33), atten=ADC.ATTN_11DB)
 
@@ -24,14 +25,20 @@ class grados():
                 kelvin = (valor / 10) * 2
                 celsius = (kelvin - 273.15) - 1.25
                 final = celsius + final
-            temp= final * 1.2
+                temp_list.append(final)
+            minima, maxima = min(temp_list), max(temp_list)
+            threshold_on = (minima + maxima)
+            #print(threshold_on)
+            last_temp = threshold_on / 2.67
+            temp= last_temp
             self.datos4 = temp
-            #print (self.datos4)
+            temp_list.clear()
+            #print (temp)
             if (temp<=34 or temp >=37.5):
                 motor_dc.value(1)
             else:
                 motor_dc.value(0)
-            sleep (2)
+            sleep(2)
 
             
         
